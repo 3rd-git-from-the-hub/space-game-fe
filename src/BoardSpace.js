@@ -5,7 +5,6 @@ export default class BoardSpace extends Component {
     render() {
         const row = this.props.row;
         const col = this.props.col;
-        console.log(row, col)
         // 0: no fly , 1: planet , 2: fly path , 3: space station, 4: goal
         const boardSpaceType = this.props.boardSpaceType;
         let extraClassName;
