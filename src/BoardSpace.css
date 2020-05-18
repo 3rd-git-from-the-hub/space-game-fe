@@ -1,0 +1,22 @@
+.boardspace {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.nofly {
+    background-color: cornflowerblue;
+}
+
+.planet {
+    background-color: goldenrod;
+}
+
+.flypath {
+    background-color: pink;
+}
+
+.goal {
+    background-color: green;
+}
