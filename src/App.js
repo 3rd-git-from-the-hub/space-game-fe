@@ -6,51 +6,77 @@ import {
     Link,
 } from "react-router-dom";
 import Board from './Board.js';
+import PlanetPage from './PlanetPage.js'
+import request from 'superagent'
 // import SignUp from './SignUp.js'
 // import SignIn from './SignIn.js'
 // import PrivateRoute from './PrivateRoute.js';
 // import './Common.css';
 
 export default class App extends Component {
-  // state = { token: localStorage.getItem('TOKEN'), email: localStorage.getItem('EMAIL') }
+  state = {
+    grid: [
+  [2, 2, 2, 1],
+  [0, 3, 4],
+  ],
+  possiblePosition: [],
+  planet: {},
+  spaceShipPosition: [0, 0],
+  }
 
-  // handleTokenChange = (myToken, myEmail) => {
-  //   this.setState({ token: myToken, email: myEmail });
-  //   localStorage.setItem('TOKEN', myToken);
-  //   localStorage.setItem('EMAIL', myEmail);
-  // }
+  isMoveInRange = (spaceShipPosition, possiblePosition) => {
 
+    if(spaceShipPosition[0] + 1 === possiblePosition[0] || spaceShipPosition[0] - 1 === possiblePosition[0]) {
+        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
+    } else if (spaceShipPosition[1] + 1 === possiblePosition[1]) {
+        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
+    } else {
+        console.log('NOT VALID MOVE')
+    }
+}
+
+locationReveal = async(attemptedClick) => {
+    let x = attemptedClick
+    if(x === 2) {
+        let fetchedPlanet = await request.get('http://localhost:3001/randomplanet')
+        let planet = fetchedPlanet.body
+        console.log(fetchedPlanet.body.length, 'im the length')
+        const planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
+        //if planet index === alreadyvisited[index] do another math random
+        this.setState({ planet: planet[planetIndex] })
+        console.log(planet[planetIndex], 'im the planet')
+    }
+}
+getEvent = async() => {
+    let fetchedEvent = await request.get(`http://localhost:3001/events/${this.state.planet.id}`)
+}
+
+handleSpacePress = async (col, row) => {
+    console.log(col, row, 'col row')
+    let attemptedClick = this.state.grid[col][row]
+    let proposedPosition = [col, row]
+    if(attemptedClick === 0) {
+        proposedPosition = this.state.spaceShipPosition
+        console.log('sorry not a good move')
+    } else {
+        this.setState({ possiblePosition: [col, row] })
+    }
+
+    this.isMoveInRange(this.state.spaceShipPosition, proposedPosition)
+    this.locationReveal(attemptedClick)
+
+}
   render() {
+    
     return (
       <div>
         <Router>
-          {/* <ul>
-    { this.state.token && <div className="loggedin">Logged in: {this.state.email}</div> }
-            { this.state.token && <Link to="/quests"><div>Quests</div></Link> }
-            <Link to="/signin"><div>Sign in</div></Link>
-            <Link to="/signup"><div>Sign up</div></Link>
-            <button onClick={() =>this.handleTokenChange('')}>Logout</button>
-          </ul> */}
+          
           <Switch>
-            <Route path='/' render={(routerProps) => <Board 
-            />
-            } />
-            {/* <Route exact path='/signin' render={(routerProps) => <SignIn 
-                handleTokenChange={this.handleTokenChange} 
-                {...routerProps} />} 
-              />
-            <Route 
-            exact path='/signup' 
-              render={(routerProps) => <SignUp 
-                handleTokenChange={this.handleTokenChange} 
-                {...routerProps}/>} 
-              />
-            <PrivateRoute 
-              exact 
-              path='/quests' 
-              token={this.state.token} 
-              render={(routerProps) => <Quests
-              {...routerProps} />} /> */}
+            <Route path='/' exact render={(routerProps) => <Board grid={this.state.grid} possiblePosition={this.state.possiblePosition} planet={this.state.planet}
+            spaceShipPosition={this.state.spaceShipPosition} handleSpacePress={this.handleSpacePress} {...routerProps}
+            />}/>
+             <Route path='/planet' render={(routerProps) => <PlanetPage {...routerProps}/>}/>
           </Switch>
         </Router>
       </div>
