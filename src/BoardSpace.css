@@ -21,3 +21,7 @@
 .goal {
     background-color: green;
 }
+
+.spaceship {
+    border: 2px solid purple;
+}
