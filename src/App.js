@@ -8,6 +8,8 @@ import {
 import Board from './Board.js';
 import PlanetPage from './PlanetPage.js'
 import request from 'superagent'
+import SignIn from './signin.js'
+import SignUp from './signup.js'
 // import SignUp from './SignUp.js'
 // import SignIn from './SignIn.js'
 // import PrivateRoute from './PrivateRoute.js';
@@ -22,6 +24,17 @@ export default class App extends Component {
   possiblePosition: [],
   planet: {},
   spaceShipPosition: [0, 0],
+  userShip: {
+    ship_name: 'The Enterprise',
+    ship_image: 'im an image',
+    ship_fuel: 4,
+    ship_hull: 10,
+    base_combat: 2,
+    base_diplomacy: 4,
+    base_science: 2,
+    used_item_slots: 0,
+    max_item_slots: 3
+  }
   }
 
   isMoveInRange = (spaceShipPosition, possiblePosition) => {
@@ -77,12 +90,18 @@ handleSpacePress = async (col, row) => {
             grid={this.state.grid} 
             possiblePosition={this.state.possiblePosition} 
             planet={this.state.planet}
-            spaceShipPosition={this.state.spaceShipPosition} 
+            spaceShipPosition={this.state.spaceShipPosition}
+            userShip={this.state.userShip}
             handleSpacePress={this.handleSpacePress} 
             {...routerProps}
             />}/>
              <Route path='/planet' render={(routerProps) => <PlanetPage 
              planet={this.state.planet}
+             userShip={this.state.userShip}
+             {...routerProps}/>}/>
+             <Route path='/signup' render={(routerProps) => <SignUp 
+             {...routerProps}/>}/>
+             <Route path='/signin' render={(routerProps) => <SignIn
              {...routerProps}/>}/>
           </Switch>
         </Router>
