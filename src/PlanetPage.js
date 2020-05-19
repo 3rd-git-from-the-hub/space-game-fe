@@ -7,15 +7,15 @@ export default class PlanetPage extends Component {
             event_choices: []
         },
         eventChoices: [],
-        results: ''
+        results: '',
+        rewards: [],
+        rollNeeded: '',
+        userRoll: ''
     }
 
 
     async componentDidMount() {
         let fetchedEvent = await request.get(`http://localhost:3001/events/${this.props.planet.id}`)
-        console.log(this.props.planet.id, 'id')
-        console.log(fetchedEvent)
-        console.log(fetchedEvent.body[0].event_choices.map(event => JSON.parse(event)), 'im here jacob')
         const eventChoices = fetchedEvent.body[0].event_choices.map(event => JSON.parse(event))
         this.setState({ event: fetchedEvent.body[0], eventChoices: eventChoices })
     }
@@ -27,21 +27,27 @@ export default class PlanetPage extends Component {
         let ship = this.props.userShip;
         let userRoll = Math.ceil(Math.random() * 10)
         userRoll += ship[`base_${roll_type}`]
+        let arr = [];
         if(userRoll >= rollNeeded) {
-            this.setState({results: chosenChoice.result.sucess})
+            const successArray = [chosenChoice.rewards.success_fuel, chosenChoice.rewards.success_credit, chosenChoice.rewards.success_health]
+            arr = successArray;
+            
+            this.setState({ results: chosenChoice.result.sucess, rewards: successArray, userRoll: userRoll, rollNeeded: rollNeeded })
+        } else {
+            const failureArray = [chosenChoice.rewards.failure_fuel, chosenChoice.rewards.failure_credit, chosenChoice.rewards.failure_health];
+            arr = failureArray;
+            this.setState({ results: chosenChoice.result.failure, rewards: failureArray, userRoll: userRoll, rollNeeded: rollNeeded })
         }
-        console.log(rollNeeded, 'roll needed')
-        console.log(userRoll, 'user roll')
+        this.props.applyShipStats(arr[2], arr[0], arr[1])
     }
     //this.props.userShip
+    
 
     //add button to choices and submit, run function that checks if roll is good enough, if success provide the success message and success results, if fail provide the fail, update player stats for ship, check if player dies, if player doesn't die send back to planet screen.
 
     //CREATE PLAYER OBJECT we need to decide if creating blank player object in backend that player can reset or storing in local storage.
 
     render() {
-        console.log(this.state.eventChoices)
-        console.log(this.state.results, 'its me results')
         return (
             <div>
                 <p>{this.state.event.event_image}</p>
@@ -56,7 +62,18 @@ export default class PlanetPage extends Component {
                         </div>
                                 )
             }
-            {this.state.results && <p>{this.state.results}</p>}
+            {this.state.results && <div>
+                <p>{this.state.results}</p>
+                <p>You needed a {this.state.rollNeeded} and rolled a with bonuses applied {this.state.userRoll}</p>
+                <ul>
+                    <li>Health change: {this.state.rewards[2]}</li>
+                    <li>Fuel change: {this.state.rewards[0]}</li>
+                    <li>Credit change: {this.state.rewards[1]}</li>
+                </ul>
+             
+                <button onClick={() => this.props.history.push('/')}>Back to the map</button>
+
+                </div>}
             </div>
         )
     }

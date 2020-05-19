@@ -22,7 +22,6 @@ export default class BoardSpace extends Component {
 
         if(row === this.props.spaceship[0] && col === this.props.spaceship[1]) {
             spaceShipClass = 'spaceship'
-            console.log('im still working')
         }
 
         return (

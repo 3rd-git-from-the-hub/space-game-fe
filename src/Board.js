@@ -11,7 +11,6 @@ export default class Board extends Component {
     render() {
         console.log(this.props.spaceShipPosition, 'spaceship position in render')
       
-        console.log((this.props.planet.id), `|||||||`)
         const grid = this.props.grid;
         return (
         <section>
