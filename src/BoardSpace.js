@@ -8,6 +8,7 @@ export default class BoardSpace extends Component {
         // 0: no fly , 1: planet , 2: fly path , 3: space station, 4: goal
         const boardSpaceType = this.props.boardSpaceType;
         let extraClassName;
+        let spaceShipClass = '';
         // make this a switch statement
         if(boardSpaceType === 0) {
             extraClassName = 'nofly'
@@ -19,8 +20,13 @@ export default class BoardSpace extends Component {
             extraClassName = 'goal'
         }
 
+        if(row === this.props.spaceship[0] && col === this.props.spaceship[1]) {
+            spaceShipClass = 'spaceship'
+            console.log('im still working')
+        }
+
         return (
-            <div className={`boardspace ${extraClassName}`} 
+            <div className={`boardspace ${extraClassName} ${spaceShipClass}`} 
             onClick={() => this.props.onClick(row, col)}
             >
 
