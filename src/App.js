@@ -73,10 +73,17 @@ handleSpacePress = async (col, row) => {
         <Router>
           
           <Switch>
-            <Route path='/' exact render={(routerProps) => <Board grid={this.state.grid} possiblePosition={this.state.possiblePosition} planet={this.state.planet}
-            spaceShipPosition={this.state.spaceShipPosition} handleSpacePress={this.handleSpacePress} {...routerProps}
+            <Route path='/' exact render={(routerProps) => <Board 
+            grid={this.state.grid} 
+            possiblePosition={this.state.possiblePosition} 
+            planet={this.state.planet}
+            spaceShipPosition={this.state.spaceShipPosition} 
+            handleSpacePress={this.handleSpacePress} 
+            {...routerProps}
             />}/>
-             <Route path='/planet' render={(routerProps) => <PlanetPage {...routerProps}/>}/>
+             <Route path='/planet' render={(routerProps) => <PlanetPage 
+             planet={this.state.planet}
+             {...routerProps}/>}/>
           </Switch>
         </Router>
       </div>
