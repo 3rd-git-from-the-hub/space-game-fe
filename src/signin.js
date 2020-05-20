@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent';
 
-export default class signin extends Component {
+export default class Signin extends Component {
 
     state = {
         email: '',
