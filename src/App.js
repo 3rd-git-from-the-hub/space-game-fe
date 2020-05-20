@@ -8,14 +8,15 @@ import {
 import Board from './Board.js';
 import PlanetPage from './PlanetPage.js'
 import request from 'superagent'
-import SignIn from './signin.js'
-import SignUp from './signup.js'
+import SignIn from './Signin.js'
+import SignUp from './Signup.js'
 import GameOver from './GameOver.js'
 // import SignUp from './SignUp.js'
 // import SignIn from './SignIn.js'
 // import PrivateRoute from './PrivateRoute.js';
 // import './Common.css';
 import Game from './Game.js'
+import CharacterSelectPage from './CharacterSelectPage.js'
 export default class App extends Component {
   state = {
     grid: [
@@ -121,6 +122,8 @@ handleSpacePress = async (col, row) => {
             handleSpacePress={this.handleSpacePress} 
             {...routerProps}
             />}/>
+            <Route path='/characterSelect' render={(routerProps) => <CharacterSelectPage
+             {...routerProps}/>}/>
              <Route path='/planet' render={(routerProps) => <PlanetPage 
              planet={this.state.planet}
              applyShipStats={this.applyShipStats}
