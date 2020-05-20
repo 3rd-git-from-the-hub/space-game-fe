@@ -16,7 +16,9 @@ import GameOver from './GameOver.js'
 // import PrivateRoute from './PrivateRoute.js';
 // import './Common.css';
 import Game from './Game.js'
+
 import CharacterSelectPage from './CharacterSelectPage.js'
+
 export default class App extends Component {
   state = {
     grid: [
@@ -30,7 +32,7 @@ export default class App extends Component {
     ship_name: 'The Enterprise',
     ship_image: 'im an image',
     ship_fuel: -1,
-    ship_hull: 0,
+    ship_hull: 1,
     ship_credits: 0,
     base_combat: 2,
     base_diplomacy: 4,
@@ -59,15 +61,6 @@ export default class App extends Component {
       max_item_slots: this.state.userShip.max_item_slots
     } })
   }
-
-  // isGameOver = () => {
-  //   if(this.state.userShip.ship_hull <= 0) {
-  //     this.history.push('/gameOver')
-  //   }
-  //   if(this.state.userShip.ship_fuel <= 0) {
-  //     this.history.push('/gameOver')
-  //   }
-  // }
 
   isMoveInRange = (spaceShipPosition, possiblePosition) => {
     console.log('ss pos:', spaceShipPosition, 'p pos:', possiblePosition)
