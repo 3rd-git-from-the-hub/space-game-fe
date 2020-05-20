@@ -10,11 +10,12 @@ import PlanetPage from './PlanetPage.js'
 import request from 'superagent'
 import SignIn from './signin.js'
 import SignUp from './signup.js'
+import GameOver from './GameOver.js'
 // import SignUp from './SignUp.js'
 // import SignIn from './SignIn.js'
 // import PrivateRoute from './PrivateRoute.js';
 // import './Common.css';
-
+import Game from './Game.js'
 export default class App extends Component {
   state = {
     grid: [
@@ -27,8 +28,8 @@ export default class App extends Component {
   userShip: {
     ship_name: 'The Enterprise',
     ship_image: 'im an image',
-    ship_fuel: 4,
-    ship_hull: 10,
+    ship_fuel: -1,
+    ship_hull: 0,
     ship_credits: 0,
     base_combat: 2,
     base_diplomacy: 4,
@@ -43,12 +44,7 @@ export default class App extends Component {
     const newHealth = this.state.userShip.ship_hull + health;
     const newFuel = this.state.userShip.ship_fuel + fuel;
     const newCredits = this.state.userShip.ship_credits + credits;
-    // set the state to update users ship
-    console.log(newHealth, newFuel, newCredits)
-
-    // this.setState({ [userShip.ship_hull]: newHealth, [userShip.ship_fuel]: newFuel, [userShip.ship_credits]: newCredits})
-
-
+   
     this.setState({ userShip: {
       ship_name: this.state.userShip.ship_name,
       ship_image: this.state.userShip.ship_image,
@@ -63,14 +59,14 @@ export default class App extends Component {
     } })
   }
 
-  isGameOver = () => {
-    if(this.state.userShip.ship_hull <= 0) {
-      console.log('game over')
-    }
-    if(this.state.userShip.ship_fuel <= 0) {
-      console.log('game over out of gas')
-    }
-  }
+  // isGameOver = () => {
+  //   if(this.state.userShip.ship_hull <= 0) {
+  //     this.history.push('/gameOver')
+  //   }
+  //   if(this.state.userShip.ship_fuel <= 0) {
+  //     this.history.push('/gameOver')
+  //   }
+  // }
 
   isMoveInRange = (spaceShipPosition, possiblePosition) => {
     console.log('ss pos:', spaceShipPosition, 'p pos:', possiblePosition)
@@ -94,9 +90,6 @@ locationReveal = async(attemptedClick) => {
         this.setState({ planet: planet[planetIndex] })
     }
 }
-getEvent = async() => {
-    let fetchedEvent = await request.get(`http://localhost:3001/events/${this.state.planet.id}`)
-}
 
 handleSpacePress = async (col, row) => {
     
@@ -111,7 +104,6 @@ handleSpacePress = async (col, row) => {
 
     this.isMoveInRange(this.state.spaceShipPosition, proposedPosition)
     this.locationReveal(attemptedClick)
-
 }
   render() {
     
@@ -137,6 +129,10 @@ handleSpacePress = async (col, row) => {
              <Route path='/signup' render={(routerProps) => <SignUp 
              {...routerProps}/>}/>
              <Route path='/signin' render={(routerProps) => <SignIn
+             {...routerProps}/>}/>
+             <Route path='/gameOver' render={(routerProps) => <GameOver
+             {...routerProps}/>}/>
+            <Route path='/secretPage' render={(routerProps) => <Game userShip={this.state.userShip}
              {...routerProps}/>}/>
           </Switch>
         </Router>

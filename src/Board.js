@@ -4,13 +4,20 @@ import './Board.css'
 import { Link } from 'react-router-dom'
 
 export default class Board extends Component {
-    
+    // isGameOver = () => {
+    //     if(this.props.userShip.ship_hull <= 0) {
+    //       this.props.history.push('/gameOver')
+    //     }
+    //     if(this.props.userShip.ship_fuel <= 0) {
+    //       this.props.history.push('/gameOver')
+    //     }
+    //   }
     
     // 0: no fly , 1: planet , 2: fly path , 3: space station, 4: goal
     
     render() {
         console.log(this.props.spaceShipPosition, 'spaceship position in render')
-      
+    
         const grid = this.props.grid;
         return (
         <section>
@@ -38,6 +45,7 @@ export default class Board extends Component {
                                     row={rowIndex}
                                     col={boardSpaceIndex}
                                     onClick={(row, col) => this.props.handleSpacePress(row, col)}
+                                    
                                     />
                                 })
                             }

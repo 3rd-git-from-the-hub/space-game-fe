@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+// import { isGameOver } from './Game.js'
 
 export default class PlanetPage extends Component {
     state = {
@@ -13,6 +14,14 @@ export default class PlanetPage extends Component {
         userRoll: ''
     }
 
+    isGameOver = () => {
+        if(this.props.userShip.ship_hull <= 0) {
+          this.props.history.push('/gameOver')
+        }
+        if(this.props.userShip.ship_fuel <= 0) {
+          this.props.history.push('/gameOver')
+        }
+      }
 
     async componentDidMount() {
         let fetchedEvent = await request.get(`http://localhost:3001/events/${this.props.planet.id}`)
@@ -39,6 +48,9 @@ export default class PlanetPage extends Component {
             this.setState({ results: chosenChoice.result.failure, rewards: failureArray, userRoll: userRoll, rollNeeded: rollNeeded })
         }
         this.props.applyShipStats(arr[2], arr[0], arr[1])
+
+        this.isGameOver();
+        // this.props.statCheck()
     }
     //this.props.userShip
     
