@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import './test.css'
 
 export default class Signin extends Component {
 
@@ -22,19 +23,11 @@ export default class Signin extends Component {
     }
 
     render() {
-        const {email, password} = this.state;
+        // const {email, password} = this.state;
         return (
             <div>
-                    <form onSubmit = { this.handleSubmit }>
-                        <label>
-                            Email:
-                            <input onChange={this.handleChange} name="email" value={email}/>
-                        </label>
-                        <label>
-                            Password:
-                            <input onChange={this.handleChange} name="password" value={password}/>
-                        </label>
-                        <button>SUBMIT</button>
+                    <form>
+                        <input type='text'></input>
                     </form>
             </div>
         )

@@ -14,15 +14,6 @@ export default class PlanetPage extends Component {
         userRoll: ''
     }
 
-    isGameOver = () => {
-        if(this.props.userShip.ship_hull <= 0) {
-          this.props.history.push('/gameOver')
-        }
-        if(this.props.userShip.ship_fuel <= 0) {
-          this.props.history.push('/gameOver')
-        }
-      }
-
     async componentDidMount() {
         let fetchedEvent = await request.get(`http://localhost:3001/events/${this.props.planet.id}`)
         const eventChoices = fetchedEvent.body[0].event_choices.map(event => JSON.parse(event))
@@ -33,7 +24,7 @@ export default class PlanetPage extends Component {
         let chosenChoice = this.state.eventChoices[index];
         let roll_type = chosenChoice.roll_type;
         let rollNeeded = chosenChoice.roll_needed;
-        let ship = this.props.userShip;
+        let ship = this.props.shipStats;
         let userRoll = Math.ceil(Math.random() * 10)
         userRoll += ship[`base_${roll_type}`]
         let arr = [];
@@ -49,10 +40,19 @@ export default class PlanetPage extends Component {
         }
         this.props.applyShipStats(arr[2], arr[0], arr[1])
 
-        this.isGameOver();
-        // this.props.statCheck()
     }
     //this.props.userShip
+    // this is kind of the stat check function
+    goToNextPage = () => {
+        this.props.history.push('/')
+
+        if (this.props.ship_hull <= 0) {
+            this.props.history.push('/gameOver')
+        }
+        if (this.props.ship_fuel <= 0) {
+            this.props.history.push('/gameOver')
+        }
+    }
     
 
     //add button to choices and submit, run function that checks if roll is good enough, if success provide the success message and success results, if fail provide the fail, update player stats for ship, check if player dies, if player doesn't die send back to planet screen.
@@ -83,7 +83,7 @@ export default class PlanetPage extends Component {
                     <li>Credit change: {this.state.rewards[1]}</li>
                 </ul>
              
-                <button onClick={() => this.props.history.push('/')}>Back to the map</button>
+                <button onClick={this.goToNextPage}>Continue</button>
 
                 </div>}
             </div>

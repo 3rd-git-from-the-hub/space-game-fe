@@ -1,0 +1,79 @@
+body, html {
+    height: 100%
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.wrap-login {
+    overflow: hidden;
+    padding: 50px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, .1);
+}
+
+.login100-form-title {
+    display: block;
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+.container-form-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px
+  }
+
+.wrap-input{
+    margin: 10px;
+    width: 100px;
+}
+
+/* <body>
+<div class='limiter'>
+    <div class='login-container'>
+        <div class='wrap-login'>
+        <span class="login100-form-title p-b-26">
+            Login
+        </span>
+            <form onSubmit={this.props.submitHandle} class='login-form'>
+                <div class='login-options'>
+                    <div class='wrap-input'>
+                        <label>
+                            Email:
+                            <input onChange={this.handleChange} name="email" />
+                        </label>
+                    </div>
+                <div class='wrap-input'>
+                    <label>
+                    Password:
+                        <input onChange={this.handleChange} name="password" />
+                    </label>
+                </div>
+                </div>
+                    <div class='container-form-btn'>
+                        <div class='wrap-form-btn'>
+                            <button>Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body> */

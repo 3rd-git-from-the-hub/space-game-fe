@@ -10,7 +10,7 @@ export default class Signup extends Component {
 
     handleSubmit = async(e) => {
         e.preventDefault();
-        let token = await request.post('http://localhost:3001/signun', this.state)
+        let token = await request.post('http://localhost:3001/signup', this.state)
         localStorage.setItem('TOKEN_KEY', token.body.token)
         
     }
@@ -26,7 +26,7 @@ export default class Signup extends Component {
         const {email, password} = this.state;
         return (
             <div>
-                    <form onSubmit = { this.handleSubmit }>
+                    <form onSubmit={this.handleSubmit}>
                         <label>
                             Email:
                             <input onChange={this.handleChange} name="email" value={email}/>
