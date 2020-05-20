@@ -30,7 +30,7 @@ export default class App extends Component {
   spaceShipPosition: [0, 0],
   ship_name: 'The Enterprise',
   ship_image: 'im an image',
-  ship_fuel: -1,
+  ship_fuel: 3,
   ship_hull: 1,
   ship_credits: 0,
   used_item_slots: 0,
@@ -42,7 +42,7 @@ export default class App extends Component {
   },
   shipInitialSelect: 0,
   planets_visited: [],
-  planets_coordinates: []
+  planets_coordinates: [[0,0]]
   }
 
   applyShipStats = (health, fuel, credits) => {
@@ -58,34 +58,46 @@ export default class App extends Component {
     })
   }
 
-  isMoveInRange = (spaceShipPosition, possiblePosition) => {
+  coordinatesInclude = (array, position) => {
+    const stringPosition = JSON.stringify(position)
+    const isInArray = array.some(item => {
+      return JSON.stringify(item) === stringPosition
+    })
+    return isInArray
+  }
+
+  isMoveInRange = (spaceShipPosition, possiblePosition, attemptedClick) => {
     console.log('ss pos:', spaceShipPosition, 'p pos:', possiblePosition)
 
     //if( space ship has been to these coordinates do not allow the spot to load or the ship to move)
 
     //else if( allow the ship to move and allow the spot to load)
-
-    this.state.planets_coordinates.push([possiblePosition[0], possiblePosition[1]])
+    let position = [possiblePosition[0], possiblePosition[1]]
+   
     let coordinates = this.state.planets_coordinates
     console.log(coordinates, 'coordinates')
 
-    if(coordinates.includes([possiblePosition[0], possiblePosition[1]])) {
-      console.log('coordinats include')
-      console.log(coordinates)
+
+    if(!this.coordinatesInclude(this.state.planets_coordinates, position) && this.state.ship_fuel > 0) {
+     
+      if((spaceShipPosition[0] + 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1]) || (spaceShipPosition[0] - 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1])) {
+          this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
+      } else if (spaceShipPosition[1] + 1 === possiblePosition[1] && spaceShipPosition[0] === possiblePosition[0]) {
+          this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]], })
+      } else {
+          console.log('NOT VALID MOVE')
+      }
+      this.state.planets_coordinates.push([possiblePosition[0], possiblePosition[1]])
+      this.setState({ship_fuel: this.state.ship_fuel - 1})
+
+      this.locationReveal(attemptedClick)
     }
 
-    if((spaceShipPosition[0] + 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1]) || (spaceShipPosition[0] - 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1])) {
-        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
-    } else if (spaceShipPosition[1] + 1 === possiblePosition[1] && spaceShipPosition[0] === possiblePosition[0]) {
-        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]], })
-    } else {
-        console.log('NOT VALID MOVE')
-    }
 }
 
 locationReveal = async(attemptedClick) => {
-    let x = attemptedClick
-    if(x === 2) {
+    
+    if(attemptedClick === 2) {
         let fetchedPlanet = await request.get('http://localhost:3001/randomplanet')
         let planet = fetchedPlanet.body
         let planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
@@ -96,6 +108,10 @@ locationReveal = async(attemptedClick) => {
           let planet_visited_array = this.state.planets_visited
           planet_visited_array.push(planetIndex)
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
+        } else if(attemptedClick === 3) {
+          this.setState({ ship_fuel: this.state.ship_fuel + 3 })
+        } else if(attemptedClick === 4) {
+          console.log('you win')
         }
     }
 
@@ -110,8 +126,8 @@ handleSpacePress = async (col, row) => {
         this.setState({ possiblePosition: [col, row] })
     }
 
-    this.isMoveInRange(this.state.spaceShipPosition, proposedPosition)
-    this.locationReveal(attemptedClick)
+    this.isMoveInRange(this.state.spaceShipPosition, proposedPosition, attemptedClick)
+    // this.locationReveal(attemptedClick)
 }
 
 updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value})}
