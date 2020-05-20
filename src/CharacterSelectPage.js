@@ -17,7 +17,7 @@ export default class CharacterSelectPage extends Component {
             shipChoice: finalChoice
         })
 
-        console.log(updatedProfile.body[0].user_ship);
+        console.log(JSON.parse(updatedProfile.body[0].user_ship));
         
     }
     render() {
