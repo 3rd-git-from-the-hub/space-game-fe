@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 
 export default class Game extends Component {
    isGameOver = () => {
-     if(this.props.userShip.ship_hull <= 0) {
+     if(this.props.ship_hull <= 0) {
     this.props.history.push('/gameOver')
   }
-  if(this.props.userShip.ship_fuel <= 0) {
+  if(this.props.ship_fuel <= 0) {
     this.props.history.push('/gameOver')
   }
 }

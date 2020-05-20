@@ -24,4 +24,6 @@
 
 .spaceship {
     border: purple 5px dotted;
+    cursor: not-allowed;
+    pointer-events: none;
 }

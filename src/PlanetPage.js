@@ -24,7 +24,7 @@ export default class PlanetPage extends Component {
         let chosenChoice = this.state.eventChoices[index];
         let roll_type = chosenChoice.roll_type;
         let rollNeeded = chosenChoice.roll_needed;
-        let ship = this.props.userShip;
+        let ship = this.props.shipStats;
         let userRoll = Math.ceil(Math.random() * 10)
         userRoll += ship[`base_${roll_type}`]
         let arr = [];
@@ -46,10 +46,10 @@ export default class PlanetPage extends Component {
     goToNextPage = () => {
         this.props.history.push('/')
 
-        if (this.props.userShip.ship_hull <= 0) {
+        if (this.props.ship_hull <= 0) {
             this.props.history.push('/gameOver')
         }
-        if (this.props.userShip.ship_fuel <= 0) {
+        if (this.props.ship_fuel <= 0) {
             this.props.history.push('/gameOver')
         }
     }

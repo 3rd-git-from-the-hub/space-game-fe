@@ -28,48 +28,56 @@ export default class App extends Component {
   possiblePosition: [],
   planet: {},
   spaceShipPosition: [0, 0],
-  userShip: {
-    ship_name: 'The Enterprise',
-    ship_image: 'im an image',
-    ship_fuel: -1,
-    ship_hull: 1,
-    ship_credits: 0,
-    base_combat: 2,
-    base_diplomacy: 4,
-    base_science: 2,
-    used_item_slots: 0,
-    max_item_slots: 3
+  ship_name: 'The Enterprise',
+  ship_image: 'im an image',
+  ship_fuel: -1,
+  ship_hull: 1,
+  ship_credits: 0,
+  used_item_slots: 0,
+  max_item_slots: 3,
+  ship_stats: {
+  base_combat: 2,
+  base_diplomacy: 4,
+  base_science: 2,
   },
-  shipInitialSelect: 0
+  shipInitialSelect: 0,
+  planets_visited: [],
+  planets_coordinates: []
   }
 
   applyShipStats = (health, fuel, credits) => {
     console.log(health, fuel, credits)
-    const newHealth = this.state.userShip.ship_hull + health;
-    const newFuel = this.state.userShip.ship_fuel + fuel;
-    const newCredits = this.state.userShip.ship_credits + credits;
+    const newHealth = this.state.ship_hull + health;
+    const newFuel = this.state.ship_fuel + fuel;
+    const newCredits = this.state.ship_credits + credits;
    
-    this.setState({ userShip: {
-      ship_name: this.state.userShip.ship_name,
-      ship_image: this.state.userShip.ship_image,
+    this.setState({
       ship_fuel: newFuel,
       ship_hull: newHealth,
       ship_credits:  newCredits,
-      base_combat:  this.state.userShip.base_combat,
-      base_diplomacy:  this.state.userShip.base_diplomacy,
-      base_science:  this.state.userShip.base_science,
-      used_item_slots:  this.state.userShip.used_item_slots,
-      max_item_slots: this.state.userShip.max_item_slots
-    } })
+    })
   }
 
   isMoveInRange = (spaceShipPosition, possiblePosition) => {
     console.log('ss pos:', spaceShipPosition, 'p pos:', possiblePosition)
 
+    //if( space ship has been to these coordinates do not allow the spot to load or the ship to move)
+
+    //else if( allow the ship to move and allow the spot to load)
+
+    this.state.planets_coordinates.push([possiblePosition[0], possiblePosition[1]])
+    let coordinates = this.state.planets_coordinates
+    console.log(coordinates, 'coordinates')
+
+    if(coordinates.includes([possiblePosition[0], possiblePosition[1]])) {
+      console.log('coordinats include')
+      console.log(coordinates)
+    }
+
     if((spaceShipPosition[0] + 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1]) || (spaceShipPosition[0] - 1 === possiblePosition[0] && spaceShipPosition[1] === possiblePosition[1])) {
         this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
     } else if (spaceShipPosition[1] + 1 === possiblePosition[1] && spaceShipPosition[0] === possiblePosition[0]) {
-        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]]})
+        this.setState({ spaceShipPosition: [possiblePosition[0], possiblePosition[1]], })
     } else {
         console.log('NOT VALID MOVE')
     }
@@ -80,11 +88,16 @@ locationReveal = async(attemptedClick) => {
     if(x === 2) {
         let fetchedPlanet = await request.get('http://localhost:3001/randomplanet')
         let planet = fetchedPlanet.body
-        const planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
-        //if planet index === alreadyvisited[index] do another math random
-        this.setState({ planet: planet[planetIndex] })
+        let planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
+        while(this.state.planets_visited.includes(planetIndex) && (this.state.planets_visited.length < 4)) {
+          planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
+        }
+        console.log(planet)
+          let planet_visited_array = this.state.planets_visited
+          planet_visited_array.push(planetIndex)
+          this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
+        }
     }
-}
 
 handleSpacePress = async (col, row) => {
     
@@ -116,7 +129,18 @@ spaceshipSelectHandle = async(e) => {
       shipChoice: finalChoice
   })
 
-  this.setState({userShip: JSON.parse(updatedProfile.body[0].user_ship)})
+  let userShip = JSON.parse(updatedProfile.body[0].user_ship)
+  this.setState({ ship_name: userShip.ship_name,
+                  ship_image: userShip.ship_image,
+                  ship_fuel: userShip.ship_fuel,
+                  ship_hull: userShip.ship_hull,
+                  ship_credits: userShip.shipcredits,
+                  ship_stats: { base_combat: userShip.base_combat,
+                  base_diplomacy: userShip.base_diplomacy,
+                  base_science: userShip.base_science },
+                  used_item_slots: userShip.used_item_slots,
+                  max_item_slots: userShip.max_item_slots, 
+                })
   
 }
   render() {
@@ -130,7 +154,6 @@ spaceshipSelectHandle = async(e) => {
             possiblePosition={this.state.possiblePosition} 
             planet={this.state.planet}
             spaceShipPosition={this.state.spaceShipPosition}
-            userShip={this.state.userShip}
             handleSpacePress={this.handleSpacePress} 
             {...routerProps}
             />}/>
@@ -141,7 +164,10 @@ spaceshipSelectHandle = async(e) => {
              <Route path='/planet' render={(routerProps) => <PlanetPage 
              planet={this.state.planet}
              applyShipStats={this.applyShipStats}
-             userShip={this.state.userShip}
+             shipFuel={this.state.ship_fuel}
+             shipHull={this.state.ship_hull}
+             shipCredits={this.state.ship_credits}
+             shipStats={this.state.ship_stats}
              {...routerProps}/>}/>
              <Route path='/signup' render={(routerProps) => <Signup 
              {...routerProps}/>}/>
