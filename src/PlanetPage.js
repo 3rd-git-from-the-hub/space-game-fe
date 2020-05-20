@@ -44,12 +44,17 @@ export default class PlanetPage extends Component {
     //this.props.userShip
     // this is kind of the stat check function
     goToNextPage = () => {
-        this.props.history.push('/')
+        if(this.props.shipHull > 0 && this.props.shipFuel > 0) {
+            console.log('tset')
+            this.props.history.push('/')
+        }
 
-        if (this.props.ship_hull <= 0) {
+        if (this.props.shipHull <= 0) {
+            console.log('tset')
             this.props.history.push('/gameOver')
         }
-        if (this.props.ship_fuel <= 0) {
+        if (this.props.shipFuel <= 0) {
+            console.log('tset')
             this.props.history.push('/gameOver')
         }
     }
