@@ -8,8 +8,8 @@ import {
 import Board from './Board.js';
 import PlanetPage from './PlanetPage.js'
 import request from 'superagent'
-import SignIn from './Signin.js'
-import SignUp from './Signup.js'
+import Signin from './signin.js'
+import Signup from './signup.js'
 import GameOver from './GameOver.js'
 // import SignUp from './SignUp.js'
 // import SignIn from './SignIn.js'
@@ -39,7 +39,8 @@ export default class App extends Component {
     base_science: 2,
     used_item_slots: 0,
     max_item_slots: 3
-  }
+  },
+  shipInitialSelect: 0
   }
 
   applyShipStats = (health, fuel, credits) => {
@@ -99,8 +100,26 @@ handleSpacePress = async (col, row) => {
     this.isMoveInRange(this.state.spaceShipPosition, proposedPosition)
     this.locationReveal(attemptedClick)
 }
+
+updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value})}
+
+spaceshipSelectHandle = async(e) => {
+  e.preventDefault();
+  const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
+
+  console.log(shipChoice);
+
+  const finalChoice = shipChoice.body[0];
+
+  const updatedProfile = await request.put(`http://localhost:3001/user`, {
+      userId: 1,
+      shipChoice: finalChoice
+  })
+
+  this.setState({userShip: JSON.parse(updatedProfile.body[0].user_ship)})
+  
+}
   render() {
-    
     return (
       <div>
         <Router>
@@ -116,15 +135,17 @@ handleSpacePress = async (col, row) => {
             {...routerProps}
             />}/>
             <Route path='/characterSelect' render={(routerProps) => <CharacterSelectPage
+            submitHandle={this.spaceshipSelectHandle} 
+            handleChange={this.updateShipSelection}
              {...routerProps}/>}/>
              <Route path='/planet' render={(routerProps) => <PlanetPage 
              planet={this.state.planet}
              applyShipStats={this.applyShipStats}
              userShip={this.state.userShip}
              {...routerProps}/>}/>
-             <Route path='/signup' render={(routerProps) => <SignUp 
+             <Route path='/signup' render={(routerProps) => <Signup 
              {...routerProps}/>}/>
-             <Route path='/signin' render={(routerProps) => <SignIn
+             <Route path='/signin' render={(routerProps) => <Signin
              {...routerProps}/>}/>
              <Route path='/gameOver' render={(routerProps) => <GameOver
              {...routerProps}/>}/>
