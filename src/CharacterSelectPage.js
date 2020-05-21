@@ -16,7 +16,7 @@ export default class CharacterSelectPage extends Component {
                 <div className='login-container'>
                     <div className='wrap-login'>
                     <span className="login100-form-title p-b-26">
-						Choose Your Spaceship
+						Choose Your Vessel
 					</span>
                         <form onSubmit={this.props.submitHandle} className='login-form'>
 
@@ -25,7 +25,7 @@ export default class CharacterSelectPage extends Component {
                                 <label>
                                 <input type='radio' value='1' onChange = {this.props.handleChange} name='spaceship' className='rocketRadio' defaultChecked/>
                                 <img src={diplomacy} alt='diplomacy_rocket' className='rocketPic'/>
-                                <figcaption>Spaceship 1</figcaption>
+                                <figcaption>Vessel 1</figcaption>
                                 </label>
                             </div>
                             <div className='wrap-input'>
@@ -34,18 +34,18 @@ export default class CharacterSelectPage extends Component {
                                 name='spaceship'
                                 className='rocketRadio'/>
                                 <img src={combat} alt='diplomacy_rocket' className='rocketPic'/>
-                                <figcaption>Spaceship 2</figcaption>
+                                <figcaption>Vessel 2</figcaption>
                                 </label>
                             </div>
                             </div>
                             <div className='container-form-btn'>
                                 <div className='wrap-form-btn'>
-                                    <button className='login-form-button'>Submit</button>
+                                    <button className='login-form-button'>Finalize Vessel Choice</button>
                                     
                                 </div>
                             </div>
                         </form>
-                        <button onClick={this.onClick}>Head to Space!</button>
+                        <button onClick={this.onClick}>Start Your Journey</button>
                     </div>
                 </div>
 

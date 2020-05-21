@@ -1,5 +1,44 @@
 
 .board-container {
     text-align: center;
-    margin: 100px 0 0; 
+    margin: 10px 0 0;
+    border: 2px solid goldenrod 
+}
+
+.top-left-container {
+    border: 15px solid transparent;
+    border-image: url('./photos/board_images/borderimagetopleft.jpg') 30 repeat;
+    background-image: url('./photos/board_images/testimagefortopleft.jpg');
+    background-size: 100% 100%;
+    background-color: rgb(74, 74, 255);
+    width: 65%;
+    height: 350px;
+    font-size: medium;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    
+}
+
+.top-left-test {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.top-right-container {
+    border: transparent 15px solid;
+    border-image: url('./photos/board_images/borderimagetopleft.jpg') 30 repeat;
+    width: 35%;
+    text-align: center;
+}
+
+.top-container {
+    display: flex;
+}
+
+.planet-image {
+    height: 330px;
+    width: 400px;
+    margin: 10px;
 }

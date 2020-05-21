@@ -61,23 +61,23 @@ export default class PlanetPage extends Component {
                 <p>{this.state.event.event_description}</p>
                 {!this.state.results && this.state.event.event_choices.map(event => JSON.parse(event)).map(
                     (event, index) => <div>
-                        <p>DESCRIPTION: {event.choice_description}</p>
+                        <p>Choice: {event.choice_description}</p>
 
-                        <button onClick= {() => this.choiceMade(index)}>Submit</button>
+                        <button onClick= {() => this.choiceMade(index)}>Choose</button>
 
                         </div>
                                 )
             }
             {this.state.results && <div>
                 <p>{this.state.results}</p>
-                <p>You needed a {this.state.rollNeeded} and rolled a with bonuses applied {this.state.userRoll}</p>
+                <p>You needed a {this.state.rollNeeded} and your total roll was {this.state.userRoll}.</p>
                 <ul>
-                    <li>Health change: {this.state.rewards[2]}</li>
+                    <li>Hull change: {this.state.rewards[2]}</li>
                     <li>Fuel change: {this.state.rewards[0]}</li>
                     <li>Credit change: {this.state.rewards[1]}</li>
                 </ul>
              
-                <button onClick={this.goToNextPage}>Continue</button>
+                <button onClick={this.goToNextPage}>Continue Your Search</button>
 
                 </div>}
             </div>
