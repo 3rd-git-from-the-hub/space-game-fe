@@ -25,32 +25,32 @@ export default class Signup extends Component {
     render() {
         const {email, password} = this.state;
         return (
-            <body>
+            <>
                 <script src="js/three.js"></script>
                 
-            <div class='limiter'>
-                <div class='login-container'>
-                    <div class='wrap-login'>
-                    <span class="login100-form-title p-b-26">
+            <div className='limiter'>
+                <div className='login-container'>
+                    <div className='wrap-login'>
+                    <span className="login100-form-title p-b-26">
                         Signup
                     </span>
                     <form onSubmit={this.handleSubmit}>
-                            <div class='login-options'>
-                                <div class='wrap-input'>
+                            <div className='login-options'>
+                                <div className='wrap-input'>
                                 <label>
                             Email:
                             <input onChange={this.handleChange} name="email" value={email}/>
                         </label>
                                 </div>
-                            <div class='wrap-input-login'>
+                            <div className='wrap-input-login'>
                             <label>
                             Password:
                             <input onChange={this.handleChange} name="password" value={password}/>
                         </label>
                             </div>
                             </div>
-                                <div class='container-form-btn'>
-                                    <div class='wrap-form-btn'>
+                                <div className='container-form-btn'>
+                                    <div className='wrap-form-btn'>
                                         <button>Sign Up</button>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@ export default class Signup extends Component {
                     </div>
                 </div>
             </div>
-            </body>  
+            </>  
         )
     }
 }
