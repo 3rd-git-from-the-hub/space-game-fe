@@ -10,9 +10,10 @@ export default class Signup extends Component {
 
     handleSubmit = async(e) => {
         e.preventDefault();
-        let token = await request.post('http://localhost:3001/signup', this.state)
+        let token = await request.post('http://localhost:3001/auth/signup', this.state)
+        console.log(token)
         localStorage.setItem('TOKEN_KEY', token.body.token)
-        
+        this.props.history.push('/characterselect')
     }
 
     handleChange = (e) => {

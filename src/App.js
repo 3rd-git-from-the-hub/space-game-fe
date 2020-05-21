@@ -3,7 +3,6 @@ import {
     BrowserRouter as Router, 
     Route, 
     Switch,
-    Link,
 } from "react-router-dom";
 import Board from './Board.js';
 import PlanetPage from './PlanetPage.js'
@@ -11,12 +10,7 @@ import request from 'superagent'
 import Signin from './signin.js'
 import Signup from './signup.js'
 import GameOver from './GameOver.js'
-// import SignUp from './SignUp.js'
-// import SignIn from './SignIn.js'
-// import PrivateRoute from './PrivateRoute.js';
-// import './Common.css';
 import Game from './Game.js'
-
 import CharacterSelectPage from './CharacterSelectPage.js'
 
 export default class App extends Component {
@@ -28,7 +22,7 @@ export default class App extends Component {
   possiblePosition: [],
   planet: {},
   spaceShipPosition: [0, 0],
-  ship_name: 'The Enterprise',
+  ship_name: 'The Fake Enterprise',
   ship_image: 'im an image',
   ship_fuel: 3,
   ship_hull: 1,
@@ -40,9 +34,15 @@ export default class App extends Component {
   base_diplomacy: 4,
   base_science: 2,
   },
-  shipInitialSelect: 0,
+  shipInitialSelect: 1,
   planets_visited: [],
-  planets_coordinates: [[0,0]]
+  planets_coordinates: [[0,0]],
+  has_won: false,
+  token: localStorage.getItem('TOKEN')
+  }
+
+  clearPlanetFunction = () => {
+    this.setState({ planet: {} })
   }
 
   applyShipStats = (health, fuel, credits) => {
@@ -69,14 +69,10 @@ export default class App extends Component {
   isMoveInRange = (spaceShipPosition, possiblePosition, attemptedClick) => {
     console.log('ss pos:', spaceShipPosition, 'p pos:', possiblePosition)
 
-    //if( space ship has been to these coordinates do not allow the spot to load or the ship to move)
-
-    //else if( allow the ship to move and allow the spot to load)
     let position = [possiblePosition[0], possiblePosition[1]]
    
     let coordinates = this.state.planets_coordinates
     console.log(coordinates, 'coordinates')
-
 
     if(!this.coordinatesInclude(this.state.planets_coordinates, position) && this.state.ship_fuel > 0) {
      
@@ -108,10 +104,12 @@ locationReveal = async(attemptedClick) => {
           let planet_visited_array = this.state.planets_visited
           planet_visited_array.push(planetIndex)
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
+        } else if(attemptedClick === 1) {
+          this.setState({ planet: {} })
         } else if(attemptedClick === 3) {
-          this.setState({ ship_fuel: this.state.ship_fuel + 3 })
+          this.setState({ ship_fuel: this.state.ship_fuel + 3, planet: {}})
         } else if(attemptedClick === 4) {
-          console.log('you win')
+          this.setState({ has_won: true, planet: { location_name: 'Earth 2' } })
         }
     }
 
@@ -125,9 +123,7 @@ handleSpacePress = async (col, row) => {
     } else {
         this.setState({ possiblePosition: [col, row] })
     }
-
     this.isMoveInRange(this.state.spaceShipPosition, proposedPosition, attemptedClick)
-    // this.locationReveal(attemptedClick)
 }
 
 updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value})}
@@ -135,14 +131,14 @@ updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value}
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
   const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
-
-  console.log(shipChoice);
+  console.log(this.state.shipInitialSelect, )
 
   const finalChoice = shipChoice.body[0];
 
   const updatedProfile = await request.put(`http://localhost:3001/user`, {
       userId: 1,
       shipChoice: finalChoice
+      
   })
 
   let userShip = JSON.parse(updatedProfile.body[0].user_ship)
@@ -165,12 +161,13 @@ spaceshipSelectHandle = async(e) => {
         <Router>
           
           <Switch>
-            <Route path='/' exact render={(routerProps) => <Board 
+            <Route path='/board' exact render={(routerProps) => <Board 
             grid={this.state.grid} 
             possiblePosition={this.state.possiblePosition} 
             planet={this.state.planet}
             spaceShipPosition={this.state.spaceShipPosition}
-            handleSpacePress={this.handleSpacePress} 
+            handleSpacePress={this.handleSpacePress}
+            hasWon={this.state.has_won}
             {...routerProps}
             />}/>
             <Route path='/characterSelect' render={(routerProps) => <CharacterSelectPage
@@ -180,16 +177,19 @@ spaceshipSelectHandle = async(e) => {
              <Route path='/planet' render={(routerProps) => <PlanetPage 
              planet={this.state.planet}
              applyShipStats={this.applyShipStats}
+             clearPlanetFunction={this.clearPlanetFunction}
              shipFuel={this.state.ship_fuel}
              shipHull={this.state.ship_hull}
              shipCredits={this.state.ship_credits}
              shipStats={this.state.ship_stats}
              {...routerProps}/>}/>
-             <Route path='/signup' render={(routerProps) => <Signup 
+             <Route path='/' exact render={(routerProps) => <Signup 
              {...routerProps}/>}/>
              <Route path='/signin' render={(routerProps) => <Signin
              {...routerProps}/>}/>
              <Route path='/gameOver' render={(routerProps) => <GameOver
+             hull={this.state.ship_hull}
+             fuel={this.state.ship_fuel}
              {...routerProps}/>}/>
             <Route path='/secretPage' render={(routerProps) => <Game userShip={this.state.userShip}
              {...routerProps}/>}/>
