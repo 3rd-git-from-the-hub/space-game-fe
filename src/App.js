@@ -40,7 +40,7 @@ export default class App extends Component {
   base_diplomacy: 4,
   base_science: 2,
   },
-  shipInitialSelect: 0,
+  shipInitialSelect: 1,
   planets_visited: [],
   planets_coordinates: []
   }

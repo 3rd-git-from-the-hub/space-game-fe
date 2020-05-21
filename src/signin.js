@@ -25,11 +25,38 @@ export default class Signin extends Component {
     render() {
         // const {email, password} = this.state;
         return (
-            <div>
-                    <form>
-                        <input type='text'></input>
-                    </form>
-            </div>
+            <body>
+<div class='limiter'>
+    <div class='login-container'>
+        <div class='wrap-login'>
+        <span class="login100-form-title p-b-26">
+            Login
+        </span>
+            <form onSubmit={this.submitHandle} class='login-form'>
+                <div class='login-options'>
+                    <div class='wrap-input'>
+                        <label>
+                            Email:
+                            <input onChange={this.handleChange} name="email" />
+                        </label>
+                    </div>
+                <div class='wrap-input-login'>
+                    <label>
+                    Password:
+                        <input onChange={this.handleChange} name="password" />
+                    </label>
+                </div>
+                </div>
+                    <div class='container-form-btn'>
+                        <div class='wrap-form-btn'>
+                            <button>Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
         )
     }
 }

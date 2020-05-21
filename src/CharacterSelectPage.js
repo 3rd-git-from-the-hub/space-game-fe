@@ -21,7 +21,7 @@ export default class CharacterSelectPage extends Component {
                             <div class='ship-options'>
                             <div class='wrap-input'>
                                 <label>
-                                <input type='radio' value='1' onChange = {this.props.handleChange} name='spaceship' defaultChecked/>
+                                <input type='radio' value='1' onChange = {this.props.handleChange} name='spaceship' className='rocketRadio' defaultChecked/>
                                 <img src={diplomacy} alt='diplomacy_rocket' className='rocketPic'/>
                                 <figcaption>Spaceship 1</figcaption>
                                 </label>
@@ -29,7 +29,8 @@ export default class CharacterSelectPage extends Component {
                             <div class='wrap-input'>
                                 <label>
                                 <input type='radio' value='2' onChange = {this.props.handleChange} 
-                                name='spaceship'/>
+                                name='spaceship'
+                                className='rocketRadio'/>
                                 <img src={combat} alt='diplomacy_rocket' className='rocketPic'/>
                                 <figcaption>Spaceship 2</figcaption>
                                 </label>
