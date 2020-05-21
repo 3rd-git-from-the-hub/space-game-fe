@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import './BoardSpace.css'
 
 export default class BoardSpace extends Component {
+
+    hasWon = () => {
+        if(this.props.hasWon === true) {
+            
+        }}
+
     render() {
         const row = this.props.row;
         const col = this.props.col;

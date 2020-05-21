@@ -4,10 +4,28 @@ import './Board.css'
 import { Link } from 'react-router-dom'
 
 export default class Board extends Component {
-    
-    // 0: no fly , 1: planet , 2: fly path , 3: space station, 4: goal
-    
+
+    goToNextPage = () => {
+        if(this.props.planet) {
+            this.props.history.push('/planet')
+        }
+        if (this.props.hasWon === true) {
+            this.props.history.push('/gameover')
+        }
+        // if (this.props.planet.)
+    }
+
+    checkPlanet = (planet) => {
+        for(let key in planet) {
+            if(planet.hasOwnProperty(key))
+            return false;
+        }
+        return true;
+    }
+
     render() {
+        let planet = this.checkPlanet(this.props.planet)
+        console.log(planet, 'planet')
         const grid = this.props.grid;
         return (
         <section>
@@ -16,10 +34,10 @@ export default class Board extends Component {
                     <p>{this.props.planet.location_name}</p>
                     <p>{this.props.planet.location_description}</p>
                     <p>{this.props.planet.location_image}</p>
-
-                    <Link to='/planet'>Explore Planet</Link>
-                    <button>Continue Your Journey</button>
-
+                {planet
+                    ? <h1>Keep Exploring For Earth 2</h1>
+                    : <button onClick={this.goToNextPage}>Explore Planet</button>
+                }
                 </div>
             }
             <div className='board-container'>

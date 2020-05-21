@@ -65,7 +65,7 @@ export default class Signin extends Component {
 
     handleSubmit = async(e) => {
         e.preventDefault();
-        let token = await request.post('http://localhost:3001/signin', this.state)
+        let token = await request.post('http://localhost:3001/auth/signin', this.state)
         localStorage.setItem('TOKEN_KEY', token.body.token)
         // this props push to character selection page
     }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import request from 'superagent'
-// import { isGameOver } from './Game.js'
 
 export default class PlanetPage extends Component {
     state = {
@@ -41,23 +40,18 @@ export default class PlanetPage extends Component {
         this.props.applyShipStats(arr[2], arr[0], arr[1])
 
     }
-    //this.props.userShip
-    // this is kind of the stat check function
     goToNextPage = () => {
-        this.props.history.push('/')
-
-        if (this.props.ship_hull <= 0) {
+        if(this.props.shipHull > 0 && this.props.shipFuel > 0) {
+            this.props.history.push('/board')
+        }
+        if (this.props.shipHull <= 0) {
             this.props.history.push('/gameOver')
         }
-        if (this.props.ship_fuel <= 0) {
+        if (this.props.shipFuel <= 0) {
             this.props.history.push('/gameOver')
         }
+        this.props.clearPlanetFunction()
     }
-    
-
-    //add button to choices and submit, run function that checks if roll is good enough, if success provide the success message and success results, if fail provide the fail, update player stats for ship, check if player dies, if player doesn't die send back to planet screen.
-
-    //CREATE PLAYER OBJECT we need to decide if creating blank player object in backend that player can reset or storing in local storage.
 
     render() {
         return (
