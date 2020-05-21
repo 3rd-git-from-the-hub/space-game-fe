@@ -41,9 +41,11 @@ export default class CharacterSelectPage extends Component {
                             <div className='container-form-btn'>
                                 <div className='wrap-form-btn'>
                                     <button className='login-form-button'>Submit</button>
+                                    
                                 </div>
                             </div>
                         </form>
+                        <button onClick={this.onClick}>Head to Space!</button>
                     </div>
                 </div>
 

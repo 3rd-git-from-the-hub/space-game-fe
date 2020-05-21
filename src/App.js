@@ -131,17 +131,9 @@ updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value}
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
   const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
-  console.log(this.state.shipInitialSelect, )
 
-  const finalChoice = shipChoice.body[0];
 
-  const updatedProfile = await request.put(`http://localhost:3001/user`, {
-      userId: 1,
-      shipChoice: finalChoice
-      
-  })
-
-  let userShip = JSON.parse(updatedProfile.body[0].user_ship)
+  let userShip = shipChoice.body[0];
   this.setState({ ship_name: userShip.ship_name,
                   ship_image: userShip.ship_image,
                   ship_fuel: userShip.ship_fuel,
