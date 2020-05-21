@@ -38,7 +38,12 @@ export default class App extends Component {
   planets_visited: [],
   planets_coordinates: [[0,0]],
   has_won: false,
-  token: localStorage.getItem('TOKEN')
+  token: localStorage.getItem('TOKEN_KEY')
+  }
+  
+  tokenChange = (myToken) => {
+    this.setState({ token: myToken })
+    localStorage.setItem('TOKEN_KEY', myToken) 
   }
 
   clearPlanetFunction = () => {
@@ -176,10 +181,13 @@ spaceshipSelectHandle = async(e) => {
              shipStats={this.state.ship_stats}
              {...routerProps}/>}/>
              <Route path='/' exact render={(routerProps) => <Signup 
+             tokenChange={this.tokenChange}
              {...routerProps}/>}/>
              <Route path='/signin' render={(routerProps) => <Signin
+             tokenChange={this.tokenChange}
              {...routerProps}/>}/>
              <Route path='/gameOver' render={(routerProps) => <GameOver
+             token={this.state.token}
              hull={this.state.ship_hull}
              fuel={this.state.ship_fuel}
              {...routerProps}/>}/>
