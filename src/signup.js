@@ -1,8 +1,61 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import * as THREE from 'three';
+import whiteCircle from './photos/background/whiteCircle.png'
 
 export default class Signup extends Component {
-
+    componentDidMount() {
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        // document.body.appendChild( renderer.domElement );
+        // use ref as a mount point of the Three.js scene instead of the document.body
+        this.mount.appendChild( renderer.domElement );
+        let starGeo = new THREE.Geometry();
+        for(let i=0 ; i<6000; i++) {
+            let star = new THREE.Vector3(
+                Math.random() * 600 - 300,
+                Math.random() * 600 - 300,
+                Math.random() * 600 - 300
+            );
+            star.velocity = 0;
+            star.acceleration = 0.001;
+            starGeo.vertices.push(star)
+        }
+        let sprite = new THREE.TextureLoader().load(whiteCircle)
+        let starMaterial = new THREE.PointsMaterial({
+            color: 0xaaaaaa,
+            sprite: 0.7,
+            map: sprite
+        });
+        let stars = new THREE.Points(starGeo, starMaterial);
+        scene.add(stars)
+        // var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        // var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        // var cube = new THREE.Mesh( geometry, material );
+        // scene.add( cube );
+        camera.position.z = 1;
+        camera.position.x = Math.PI/2
+        var animate = function () {
+            starGeo.vertices.forEach(p =>{
+                p.velocity -= p.acceleration;
+                p.z -= p.velocity;
+                if(p.z > 200) {
+                    p.z = -200;
+                    p.velocity = 0;
+                }
+            })
+            starGeo.verticesNeedUpdate = true;
+            stars.rotation.z += 0.002;
+            
+          requestAnimationFrame( animate );
+        //   cube.rotation.x += 0.01;
+        //   cube.rotation.y += 0.01;
+          renderer.render( scene, camera );
+        };
+        animate();
+      }
     state = {
         email: '',
         password: ''
@@ -10,10 +63,22 @@ export default class Signup extends Component {
 
     handleSubmit = async(e) => {
         e.preventDefault();
-        let token = await request.post('http://localhost:3001/auth/signup', this.state)
+        try {
 
-        localStorage.setItem('TOKEN_KEY', token.body.token)
-        this.props.history.push('/characterselect')
+            let token = await request.post('http://localhost:3001/auth/signup', this.state)
+    
+            // create a score table for the user when they first sign up
+            await request.post('http://localhost:3001/api/loggedinuser', {
+                name: this.state.email,
+                score: 0
+            })
+            .set('Authorization', token.body.token)
+            this.props.tokenChange(token.body.token)
+            this.props.history.push('/characterselect')
+        } catch {
+            this.setState({ failure: 'oh no' })
+
+        }
     }
 
     handleChange = (e) => {
@@ -21,13 +86,16 @@ export default class Signup extends Component {
         newState[e.target.name] = e.target.value;
         this.setState(newState);
     }
+    goToSignIn = () => {
+        this.props.history.push('/signin');
+    }
 
 
     render() {
         const {email, password} = this.state;
         return (
             <>
-                <script src="js/three.js"></script>
+            <div ref={ref => (this.mount = ref)} ></div>
                 
             <div className='limiter'>
                 <div className='login-container'>
@@ -56,6 +124,8 @@ export default class Signup extends Component {
                                 </div>
                             </div>
                         </form>
+                        {this.state.failure && <p>Username and password already exsists</p>}
+                        <button onClick={this.goToSignIn}>Go to sign in </button>
                     </div>
                 </div>
             </div>

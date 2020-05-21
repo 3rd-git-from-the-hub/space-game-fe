@@ -3,10 +3,10 @@
     height: 100%
 } */
 .limiter {
-   
+    position: absolute;
+    top: 20px;
   height: 100%;
   margin: 0;
-  background-image: url('./photos/background/galaxy.jpg');
   overflow: hidden;
 }
 .limiter {

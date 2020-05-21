@@ -21,7 +21,7 @@ export default class Signin extends Component {
                 Math.random() * 600 - 300
             );
             star.velocity = 0;
-            star.acceleration = 0.01;
+            star.acceleration = 0.001;
             starGeo.vertices.push(star)
         }
         let sprite = new THREE.TextureLoader().load(whiteCircle)
@@ -65,9 +65,14 @@ export default class Signin extends Component {
 
     handleSubmit = async(e) => {
         e.preventDefault();
-        let token = await request.post('http://localhost:3001/auth/signin', this.state)
-        localStorage.setItem('TOKEN_KEY', token.body.token)
-        // this props push to character selection page
+        try {
+
+            let token = await request.post('http://localhost:3001/auth/signin', this.state)
+            this.props.tokenChange(token.body.token)
+            this.props.history.push('/characterselect')
+        } catch {
+            this.setState({ failure: 'oh no' })
+        }
     }
 
     handleChange = (e) => {
@@ -75,39 +80,44 @@ export default class Signin extends Component {
         newState[e.target.name] = e.target.value;
         this.setState(newState);
     }
+    goToSignUp = () => {
+        this.props.history.push('/');
+    }
 
     render() {
-        // const {email, password} = this.state;
+        const {email, password} = this.state;
         return (
             <>
-<div className='limiter'>
     <div ref={ref => (this.mount = ref)} ></div>
+<div className='limiter'>
     <div className='login-container'>
         <div className='wrap-login'>
         <span className="login100-form-title p-b-26">
             Login
         </span>
-            <form onSubmit={this.submitHandle} className='login-form'>
+            <form onSubmit={this.handleSubmit} className='login-form'>
                 <div className='login-options'>
                     <div className='wrap-input'>
                         <label>
                             Email:
-                            <input onChange={this.handleChange} name="email" />
+                            <input onChange={this.handleChange} name="email" value={email} />
                         </label>
                     </div>
                 <div className='wrap-input-login'>
                     <label>
                     Password:
-                        <input onChange={this.handleChange} name="password" />
+                        <input onChange={this.handleChange} name="password" value={password} />
                     </label>
                 </div>
                 </div>
                     <div className='container-form-btn'>
                         <div className='wrap-form-btn'>
-                            <button>Sign Up</button>
+                            <button>Sign In</button>
                     </div>
                 </div>
             </form>
+            {this.state.failure && <p>Username and password not accepted</p>}
+            <button onClick={this.goToSignUp}>Go to sign in </button>
         </div>
     </div>
 </div>
