@@ -1,0 +1,80 @@
+/*login/signup/space-ship choice page basic set up */
+/* body, html {
+    height: 100%
+} */
+.limiter {
+   
+  height: 100%;
+  margin: 0;
+  background-image: url('./photos/background/galaxy.jpg');
+  overflow: hidden;
+}
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.wrap-login {
+    overflow: hidden;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.36);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, .1);
+}
+
+.login100-form-title {
+    display: block;
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: black;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+.container-form-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px
+}
+
+/*space-ship selection page css */
+.rocketRadio{
+    display: none;
+}
+.rocketPic {
+    width: 50px;
+    padding: 10px;
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input[type=radio]:checked + img {
+    border: 2px solid pink
+
+}
+
+.ship-options{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px
+}
+
+/*login Page css */
+.login-form {
+    margin-top: 20px;
+}
+
+
+
