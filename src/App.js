@@ -16,12 +16,13 @@ import CharacterSelectPage from './CharacterSelectPage.js'
 export default class App extends Component {
   state = {
     grid: [
-  [2, 2, 2, 1],
-  [0, 3, 2, 4],
+  [0, 2, 2, 3, 1, 0, 0, 0, 4],
+  [0, 3, 0, 0, 2, 2, 2, 0, 2],
+  [1, 2, 0, 0, 0, 0, 1, 2, 1],
   ],
   possiblePosition: [],
   planet: {},
-  spaceShipPosition: [0, 0],
+  spaceShipPosition: [2, 0],
   ship_name: 'The Fake Enterprise',
   ship_image: 'im an image',
   ship_fuel: 3,
@@ -160,6 +161,9 @@ spaceshipSelectHandle = async(e) => {
             spaceShipPosition={this.state.spaceShipPosition}
             handleSpacePress={this.handleSpacePress}
             hasWon={this.state.has_won}
+            shipFuel={this.state.ship_fuel}
+            shipHull={this.state.ship_hull}
+            shipCredits={this.state.ship_credits}
             {...routerProps}
             />}/>
             <Route path='/characterSelect' render={(routerProps) => <CharacterSelectPage

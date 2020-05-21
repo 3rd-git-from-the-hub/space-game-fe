@@ -5,16 +5,17 @@ import React, { Component } from 'react'
 export default class GameOver extends Component {
 
     state = {
-       final_message: '' 
+       final_message: '',
+       final_image: ''
     } 
 
     componentDidMount() {
         if(this.props.hull <= 0) {
-            this.setState({ final_message: 'omg you blew up' }) 
+            this.setState({ final_message: `The people of Earth realize that something must have gone wrong. They mourne your loss and raise a memorial in your name. You provide the courage for future Travelers to take the journey.` }) 
         } else if (this.props.fuel <= 0) {
-            this.setState({ final_message: 'you drift through space forever' })
+            this.setState({ final_message: `'Fuel: 1%... Fuel: 0%... You look at the monitor defeated. You send the data you've received back to Earth, hoping the next Traveler will have better luck than you.`})
         } else {
-            this.setState({ final_message: 'you found a new home! yay!' })
+            this.setState({ final_message: `Your monitor brings up your location. "Planet: JDXDJ73J39" A smile crosses your face as you let out a sigh or relief. You found it...Gaia. You quickly send a message back to Earth with your location. Finally a new home....` })
         }
     }
 
@@ -22,7 +23,7 @@ export default class GameOver extends Component {
         return (
             
             <div>
-                <p> random text {this.state.final_message}</p>
+                <p>{this.state.final_message}</p>
             </div>
         )
     }
