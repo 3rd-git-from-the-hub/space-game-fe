@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import request from 'superagent';
 import * as THREE from 'three';
 import whiteCircle from './photos/background/whiteCircle.png'
+import { Link } from 'react-router-dom'
 
 export default class Signup extends Component {
     componentDidMount() {
@@ -103,7 +104,7 @@ export default class Signup extends Component {
                     <span className="login100-form-title p-b-26">
                         Signup
                     </span>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className={'signup-form'}>
                             <div className='login-options'>
                                 <div className='wrap-input'>
                                 <label>
@@ -125,7 +126,8 @@ export default class Signup extends Component {
                             </div>
                         </form>
                         {this.state.failure && <p>Username and password already exsists</p>}
-                        <button onClick={this.goToSignIn}>Go to sign in </button>
+                        <button onClick={this.goToSignIn}>Go to Log In</button>
+                        <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
                     </div>
                 </div>
             </div>

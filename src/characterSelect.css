@@ -15,6 +15,7 @@
 }
 
 .login-container{
+    font-family: monospace;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -30,11 +31,13 @@
     background: rgba(255, 255, 255, 0.36);
     border-radius: 10px;
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, .1);
+    text-align: center;
+    
 }
 
 .login100-form-title {
     display: block;
-    font-family: Poppins-Bold;
+    font-family: monospace;
     font-size: 30px;
     color: black;
     line-height: 1.2;
@@ -61,7 +64,7 @@
 }
 
 input[type=radio]:checked + img {
-    border: 2px solid pink
+    border: 2px solid black;
 
 }
 
@@ -71,10 +74,32 @@ input[type=radio]:checked + img {
     margin-top: 30px
 }
 
+.space-container {
+    background-image: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-1.2.1&w=1000&q=80');
+  background-size: 100%;
+}
+
 /*login Page css */
 .login-form {
     margin-top: 20px;
 }
 
+/* signup page*/
 
+.signup-form{
+    margin-top: 20px;
+}
 
+#instructions {
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.login-form-button {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#aboutUsText{
+    color: white;
+}

@@ -1,0 +1,83 @@
+.planet-page-container {
+    display: flex;
+    position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.event-image-container {
+    width: 50%;
+    height: 100%;
+    border: 3px solid black;
+}
+
+.event-image {
+  height: 100%;
+  width: 100%;
+}
+
+.text-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border: 3px solid black;
+    padding: 10px;
+    background-image: url(./photos/background/planetbackground.jpg);
+}
+
+.event-title {
+    text-align: center;
+    border: 3px solid black;
+    margin-top: 20px;
+    background-color: goldenrod;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 25px;
+}
+
+.title {
+    text-decoration: underline;
+    font-size: xx-large;
+    font-family: monospace;
+    font-size: 2em;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 200px;
+    width: 100%;
+    border: 3px solid black;
+    border-radius: 15px;
+    background-color: goldenrod;
+    padding: 3px;
+    font-size: 25px;
+}
+
+.planet-results {
+    border: 3px solid black;
+    background-color: goldenrod;
+    border-radius: 15px;
+    font-size: 25px;
+    padding: 5px;
+}
+
+.button {
+    background-color: rgb(7, 18, 47);
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    width: 100px;
+}
+.button:hover {
+    background-color: rgb(7, 128, 63);
+}
+

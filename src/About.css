@@ -1,0 +1,25 @@
+.profilePic {
+    border-radius: 50%;
+    border: 2px solid black;
+    height: 20vh;
+    width: 20vh;
+}
+.aboutUs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    margin: 50px;
+    text-align: center;
+}
+
+.header{
+    background-image: url('./photos/About-Us.png');
+    background-size: 25%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
