@@ -117,7 +117,7 @@ export default class Signin extends Component {
                 </div>
             </form>
             {this.state.failure && <p>Username and password not accepted</p>}
-            <button onClick={this.goToSignUp}>Go to sign in </button>
+            <button onClick={this.goToSignUp}>Go to Sign Up </button>
         </div>
     </div>
 </div>

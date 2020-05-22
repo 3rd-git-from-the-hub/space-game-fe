@@ -16,9 +16,9 @@ import CharacterSelectPage from './CharacterSelectPage.js'
 export default class App extends Component {
   state = {
     grid: [
-  [0, 2, 2, 3, 1, 0, 0, 0, 4],
-  [0, 3, 0, 0, 2, 2, 2, 0, 2],
-  [1, 2, 0, 0, 0, 0, 1, 2, 1],
+  [0, 1, 1, 3, 2, 0, 0, 0, 4],
+  [0, 3, 0, 0, 1, 1, 1, 0, 1],
+  [2, 1, 0, 0, 0, 0, 2, 1, 2],
   ],
   possiblePosition: [],
   planet: {},
@@ -99,7 +99,7 @@ export default class App extends Component {
 
 locationReveal = async(attemptedClick) => {
     
-    if(attemptedClick === 2) {
+    if(attemptedClick === 1) {
         let fetchedPlanet = await request.get('http://localhost:3001/randomplanet')
         let planet = fetchedPlanet.body
         let planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
@@ -110,7 +110,7 @@ locationReveal = async(attemptedClick) => {
           let planet_visited_array = this.state.planets_visited
           planet_visited_array.push(planetIndex)
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
-        } else if(attemptedClick === 1) {
+        } else if(attemptedClick === 2) {
           this.setState({ planet: {} })
         } else if(attemptedClick === 3) {
           this.setState({ ship_fuel: this.state.ship_fuel + 3, planet: {}})
@@ -143,40 +143,36 @@ updateShipSelection = (e) => {
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
   const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
+  let userShip = shipChoice.body[0];
+  console.log(userShip);
   
-  if(this.state.shipInitialSelect === "1" || this.state.shipInitialSelect === 1) {
+  if(this.state.shipInitialSelect === "1") {
     const color = await request.get(`http://www.colr.org/json/scheme/11154`)
-    console.log(JSON.parse(color.text));
     const parsedObject = JSON.parse(color.text);
-
-  
-    console.log(parsedObject.schemes[0].colors)
-
+    
     const themeColors = parsedObject.schemes[0].colors;
-  
     const colorScheme = {
-      'background-clr': themeColors[3],
+      'background_clr': themeColors[3],
       'font_clr':themeColors[1],
-      'border-clr': themeColors[2]
+      'border_clr': themeColors[2]
     }
     localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
+    localStorage.setItem('SHIP_NAME', userShip.id);
     
-    
-  } else  if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
+  
+  } else if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
     const color = await request.get(`http://www.colr.org/json/scheme/17822`)
     const parsedObject = JSON.parse(color.text);
-
-  
-
+    console.log(parsedObject);
     const themeColors = parsedObject.schemes[0].colors;
-  
     const colorScheme = {
-      'background-clr': themeColors[2],
+      'background_clr': themeColors[2],
       'font_clr':themeColors[4],
-      'border-clr': themeColors[3]
+      'border_clr': themeColors[3]
     }
     localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
-  } else  if(this.state.shipInitialSelect === "3" || this.state.shipInitialSelect === 3) {
+    localStorage.setItem('SHIP_NAME', userShip.id);
+  } else if(this.state.shipInitialSelect === "3" || this.state.shipInitialSelect === 3) {
     const color = await request.get(`http://www.colr.org/json/scheme/7078`)
 
     const parsedObject = JSON.parse(color.text);
@@ -184,13 +180,15 @@ spaceshipSelectHandle = async(e) => {
     const themeColors = parsedObject.schemes[0].colors;
   
     const colorScheme = {
-      'background-clr': themeColors[1],
+      'background_clr': themeColors[1],
       'font_clr': '#ffffff',
-      'border-clr': themeColors[2]
+      'border_clr': themeColors[2]
     }
-    localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
+    localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme));
+    localStorage.setItem('SHIP_NAME', userShip.id);
   }
-  let userShip = shipChoice.body[0];
+
+
   this.setState({ ship_name: userShip.ship_name,
                   ship_image: userShip.ship_image,
                   ship_fuel: userShip.ship_fuel,

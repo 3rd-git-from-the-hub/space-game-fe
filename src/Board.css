@@ -1,18 +1,18 @@
 
 .board-container {
     text-align: center;
-    margin: 10px 0 0;
-    border: 2px solid goldenrod 
+    background-image: url('./photos/background/galaxy.jpg');
+    background-size: 100% 100%;
+    padding: 10vh;
 }
 
 .top-left-container {
     border: 15px solid transparent;
-    border-image: url('./photos/board_images/borderimagetopleft.jpg') 30 repeat;
+    border-image: url('./photos/board_images/borderimagetopleft.jpg') 10 repeat;
     background-image: url('./photos/board_images/testimagefortopleft.jpg');
     background-size: 100% 100%;
     background-color: rgb(74, 74, 255);
-    width: 65%;
-    height: 350px;
+    width: 65vw;
     font-size: medium;
     text-align: center;
     color: white;
@@ -22,23 +22,45 @@
 
 .top-left-test {
     display: flex;
-    justify-content: space-evenly;
-    
+    justify-content: center;
+    height: 25vh;
+    margin-top: 7vh;
 }
 
 .top-right-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: transparent 15px solid;
-    border-image: url('./photos/board_images/borderimagetopleft.jpg') 30 repeat;
-    width: 35%;
+    /* border-image: url('./photos/board_images/borderimagetopleft.jpg') 30 repeat; */
+    width: 35vw;
     text-align: center;
+    background-image: url('./photos/board_images/borderimagetopleft.jpg');
 }
 
 .top-container {
     display: flex;
+    height: 35vh;
 }
 
 .planet-image {
-    height: 330px;
-    width: 400px;
-    margin: 10px;
+    height: 15vh;
+    width: 15vh;
+    margin-top: 1vh
+}
+
+.top-right-inner-container{
+    font-size: 16px;
+    padding: 10px;
+    height: 20vh;
+}
+
+.scan-text{
+    margin-right: 10px;
+}
+
+.spaceship {
+    border: purple 5px dotted;
+    cursor: not-allowed;
+    pointer-events: none;
 }
