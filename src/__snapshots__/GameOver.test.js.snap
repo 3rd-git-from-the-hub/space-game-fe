@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders gameover correctly no props 1`] = `
+<div>
+  <p />
+  <p>
+    You have won 
+     times!
+  </p>
+</div>
+`;
+
+exports[`renders gameover correctly with props 1`] = `
+<div>
+  <p>
+    The people of Earth realize that something must have gone wrong. They mourne your loss and raise a memorial in your name. You provide the courage for future Travelers to take the journey.
+  </p>
+  <p>
+    You have won 
+     times!
+  </p>
+</div>
+`;

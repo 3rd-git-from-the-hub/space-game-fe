@@ -1,0 +1,111 @@
+/*login/signup/space-ship choice page basic set up */
+/* body, html {
+    height: 100%
+} */
+.limiter {
+    position: absolute;
+    top: 20px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login-container{
+    font-family: monospace;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.wrap-login {
+    overflow: hidden;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.36);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, .1);
+    text-align: center;
+    
+}
+
+.login100-form-title {
+    display: block;
+    font-family: monospace;
+    font-size: 30px;
+    color: black;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+.container-form-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px
+}
+
+/*space-ship selection page css */
+.rocketRadio{
+    display: none;
+}
+.rocketPic {
+    width: 50px;
+    padding: 10px;
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+input[type=radio]:checked + img {
+    border: 2px solid black;
+
+}
+
+.ship-options{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px
+}
+
+.space-container {
+    background-image: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-1.2.1&w=1000&q=80');
+  background-size: 100%;
+}
+
+/*login Page css */
+.login-form {
+    margin-top: 20px;
+}
+
+/* signup page*/
+
+.signup-form{
+    margin-top: 20px;
+}
+
+#instructions {
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.login-form-button {
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 3px solid goldenrod;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.login-form-button:hover {
+    background-color: rgb(152, 158, 155);
+}
+
+#aboutUsText{
+    color: white;
+}

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders app correctly 1`] = `
+<div>
+  <BrowserRouter>
+    <Switch>
+      <Route
+        exact={true}
+        path="/board"
+        render={[Function]}
+      />
+      <Route
+        path="/characterSelect"
+        render={[Function]}
+      />
+      <Route
+        path="/planet"
+        render={[Function]}
+      />
+      <Route
+        exact={true}
+        path="/"
+        render={[Function]}
+      />
+      <Route
+        path="/signin"
+        render={[Function]}
+      />
+      <Route
+        path="/gameOver"
+        render={[Function]}
+      />
+      <Route
+        path="/secretPage"
+        render={[Function]}
+      />
+    </Switch>
+  </BrowserRouter>
+</div>
+`;

@@ -1,0 +1,38 @@
+.boardspace {
+    height: 125px;
+    width: 125px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 1px;
+    border: none
+}
+
+.nofly {
+    background-image: url('./photos/board_images/meteroids.png');
+    background-size: 100% 100%;
+}
+
+.planet {
+    background-image: url('./photos/board_images/mystery_planet.png');
+    background-size: 100% 100%;
+}
+
+.flypath {
+    background-image: url('./photos/board_images/blackhole.png');
+    background-size: 100% 100%
+}
+
+.goal {
+
+    background-image: url('./photos/board_images/goal_planet.png');
+    background-size: 90% 90%
+}
+
+.station {
+    background-image: url('./photos/board_images/space_station.png');
+    background-size: 100% 100%;
+}
+
+.Icarus {
+    border: 2px pink dotted;
+}
