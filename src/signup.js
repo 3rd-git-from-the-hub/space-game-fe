@@ -101,7 +101,7 @@ export default class Signup extends Component {
             <div className='limiter'>
                 <div className='login-container'>
                     <div className='wrap-login'>
-                    <span className="login100-form-title p-b-26">A New Home</span>
+                    <span className="login100-form-title p-b-26">Last Hope</span>
                     <span className="login100-form-title p-b-26">
                         Signup
                     </span>
