@@ -1,0 +1,10 @@
+.game-over-text {
+    position: absolute;
+    top: 20px;
+    color: white;
+}
+
+.game-over-link {
+    color: teal;
+    margin: 50px;
+}

@@ -5,13 +5,15 @@ import './Board.css';
 export default class Board extends Component {
 
     goToNextPage = () => {
-        if(this.props.planet) {
+        if(this.props.planet.location_name === 'Open space') {
+            this.props.history.push('/gameover')
+        } else if (this.props.hasWon === true) {
+            this.props.history.push('/gameover')
+        } else if(this.props.planet) {
             this.props.history.push('/planet')
         }
-        if (this.props.hasWon === true) {
-            this.props.history.push('/gameover')
-        }
     }
+   
 
     checkPlanet = (planet) => {
         for(let key in planet) {
@@ -22,7 +24,7 @@ export default class Board extends Component {
     }
 
     render() {
-        console.log(this.props.planet.location_image)
+     
         let planet = this.checkPlanet(this.props.planet)
         console.log(planet, 'planet')
         const grid = this.props.grid;
@@ -36,8 +38,7 @@ export default class Board extends Component {
                         <p>Planet Name: {this.props.planet.location_name}</p>
                         <p>Scan Complete: {this.props.planet.location_description}</p>
                     
-                    
-                {planet
+                 {planet
                     ? <h3>Continue Your Voyage</h3>
                     : <button onClick={this.goToNextPage}>Investigate Planet</button>
                 }   
