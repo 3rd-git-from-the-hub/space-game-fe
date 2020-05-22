@@ -152,8 +152,10 @@ spaceshipSelectHandle = async(e) => {
   console.log(userShip);
   
   if(this.state.shipInitialSelect === "1") {
-    const color = await request.get(`http://www.colr.org/json/scheme/11154`)
-    const parsedObject = JSON.parse(color.text);
+    const color = await request.get(`https://api.allorigins.win/get?url=${encodeURIComponent('http://www.colr.org/json/scheme/11154')}
+    `)
+    //http://www.colr.org/json/scheme/11154
+    const parsedObject = JSON.parse(color.body.contents);
     
     const themeColors = parsedObject.schemes[0].colors;
     const colorScheme = {
@@ -166,10 +168,11 @@ spaceshipSelectHandle = async(e) => {
     
   
   } else if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
-    const color = await request.get(`http://www.colr.org/json/scheme/17822`) 
-  
-    const parsedObject = JSON.parse(color.text);
-    
+
+    const color = await request.get(`https://api.allorigins.win/get?url=${encodeURIComponent('http://www.colr.org/json/scheme/17822')}
+    `)
+    const parsedObject = JSON.parse(color.body.contents);
+    console.log(parsedObject);
     const themeColors = parsedObject.schemes[0].colors;
     const colorScheme = {
       'background_clr': themeColors[2],
@@ -179,9 +182,10 @@ spaceshipSelectHandle = async(e) => {
     localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
     localStorage.setItem('SHIP_NAME', userShip.id);
   } else if(this.state.shipInitialSelect === "3" || this.state.shipInitialSelect === 3) {
-    const color = await request.get(`http://www.colr.org/json/scheme/7078`)
+    const color = await request.get(`https://api.allorigins.win/get?url=${encodeURIComponent('http://www.colr.org/json/scheme/7078')}
+    `)
 
-    const parsedObject = JSON.parse(color.text);
+    const parsedObject = JSON.parse(color.body.contents);
 
     const themeColors = parsedObject.schemes[0].colors;
   
