@@ -96,6 +96,7 @@ export default class Signin extends Component {
 <div className='limiter'>
     <div className='login-container'>
         <div className='wrap-login'>
+        <span className="login100-form-title p-b-26">Last Hope</span>
         <span className="login100-form-title p-b-26">
             Login
         </span>
