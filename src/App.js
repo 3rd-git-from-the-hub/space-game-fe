@@ -213,6 +213,7 @@ spaceshipSelectHandle = async(e) => {
                   spaceShipPosition: [2, 0],
                   planets_visited: [],
                   planets_coordinates: [[0,0]],
+                  has_won: false
 
                 })
   
