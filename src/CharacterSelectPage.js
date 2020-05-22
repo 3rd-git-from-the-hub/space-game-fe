@@ -16,6 +16,9 @@ export default class CharacterSelectPage extends Component {
             <div className='limiter'>
                 <div className='space-container login-container'>
                     <div className='wrap-login'>
+                        <div>
+                            <span id='instructions'>You have been sent by Earth to find a new planet for human kind! <br></br>Travel along the black holes to enter new universes and find new planets for your people! </span>
+                        </div>
                     <span className="login100-form-title p-b-26">
 						Choose Your Vessel
 					</span>
