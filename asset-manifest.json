@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/space-game-fe/static/css/main.76f186a5.chunk.css",
+    "main.js": "/space-game-fe/static/js/main.11b633b9.chunk.js",
+    "main.js.map": "/space-game-fe/static/js/main.11b633b9.chunk.js.map",
+    "runtime-main.js": "/space-game-fe/static/js/runtime-main.eea6c7c7.js",
+    "runtime-main.js.map": "/space-game-fe/static/js/runtime-main.eea6c7c7.js.map",
+    "static/js/2.2b6e9dc2.chunk.js": "/space-game-fe/static/js/2.2b6e9dc2.chunk.js",
+    "static/js/2.2b6e9dc2.chunk.js.map": "/space-game-fe/static/js/2.2b6e9dc2.chunk.js.map",
+    "index.html": "/space-game-fe/index.html",
+    "precache-manifest.04aa31a16af40d61e46e6e6fd05bda02.js": "/space-game-fe/precache-manifest.04aa31a16af40d61e46e6e6fd05bda02.js",
+    "service-worker.js": "/space-game-fe/service-worker.js",
+    "static/css/main.76f186a5.chunk.css.map": "/space-game-fe/static/css/main.76f186a5.chunk.css.map",
+    "static/js/2.2b6e9dc2.chunk.js.LICENSE.txt": "/space-game-fe/static/js/2.2b6e9dc2.chunk.js.LICENSE.txt",
+    "static/media/About.css": "/space-game-fe/static/media/About-Us.863c8017.png",
+    "static/media/biology_rocket.png": "/space-game-fe/static/media/biology_rocket.9b55bac7.png",
+    "static/media/BoardSpace.css": "/space-game-fe/static/media/space_station.8a101112.png",
+    "static/media/Board.css": "/space-game-fe/static/media/testimagefortopleft.904afa07.jpg",
+    "static/media/combat_rocket.png": "/space-game-fe/static/media/combat_rocket.f83992f5.png",
+    "static/media/diplomacy_rocket.png": "/space-game-fe/static/media/diplomacy_rocket.1700ba73.png",
+    "static/media/earthmap1k.jpg": "/space-game-fe/static/media/earthmap1k.49c3b412.jpg",
+    "static/media/planetpage.css": "/space-game-fe/static/media/planetbackground.f37a23c5.jpg",
+    "static/media/whiteCircle.png": "/space-game-fe/static/media/whiteCircle.afd0635d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eea6c7c7.js",
+    "static/js/2.2b6e9dc2.chunk.js",
+    "static/css/main.76f186a5.chunk.css",
+    "static/js/main.11b633b9.chunk.js"
+  ]
+}
