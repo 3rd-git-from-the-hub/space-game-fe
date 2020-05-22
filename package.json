@@ -1,5 +1,6 @@
 {
   "name": "space-game-fe",
+  "homepage": "http://3rd-git-from-the-hub.github.io/space-game-fe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,9 +21,10 @@
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
-    
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -37,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
   }
 }
