@@ -104,7 +104,7 @@ locationReveal = async(attemptedClick) => {
         let fetchedPlanet = await request.get('https://guarded-reef-50217.herokuapp.com/randomplanet')
         let planet = fetchedPlanet.body
         let planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
-        while(this.state.planets_visited.includes(planetIndex) && (this.state.planets_visited.length < 4)) {
+        while(this.state.planets_visited.includes(planetIndex) && (this.state.planets_visited.length < 8)) {
           planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
         }
         console.log(planet)
@@ -112,11 +112,8 @@ locationReveal = async(attemptedClick) => {
           planet_visited_array.push(planetIndex)
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
 
-        } else if(attemptedClick === 1) {
-          this.setState({ planet: { location_name: 'Open space'} })
         } else if(attemptedClick === 2) {
-          this.setState({ planet: {} })
-
+          this.setState({ planet: { location_name: 'Open space'} })
         } else if(attemptedClick === 3) {
           this.setState({ ship_fuel: this.state.ship_fuel + 3, planet: {}})
         } else if(attemptedClick === 4) {
