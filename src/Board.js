@@ -19,13 +19,15 @@ export default class Board extends Component {
     }
 
     goToNextPage = () => {
-        if(this.props.planet) {
+        if(this.props.planet.location_name === 'Open space') {
+            this.props.history.push('/gameover')
+        } else if (this.props.hasWon === true) {
+            this.props.history.push('/gameover')
+        } else if(this.props.planet) {
             this.props.history.push('/planet')
         }
-        if (this.props.hasWon === true) {
-            this.props.history.push('/gameover')
-        }
     }
+   
 
     checkPlanet = (planet) => {
         for(let key in planet) {
@@ -36,20 +38,21 @@ export default class Board extends Component {
     }
 
     render() {
-    console.log(this.state);
-    let planet = this.checkPlanet(this.props.planet)
-    const grid = this.props.grid;
-    return (
-    <section>
-        <div className="top-container">
+
+     
+        let planet = this.checkPlanet(this.props.planet)
+        
+        const grid = this.props.grid;
+        return (
+        <section>
+            <div className="top-container">
+
             <div className="top-left-container">
                 {
                     this.props.planet && <div className="top-left-test">
                         <div className='scan-text'>
                             <p>Planet Name: {this.props.planet.location_name}</p>
                             <p>Scan Complete: {this.props.planet.location_description}</p>
-                    
-                    
                             {planet
                             ? <h3>No Planet Detected: Continue Your Voyage</h3>
                             : <button onClick={this.goToNextPage}>Investigate Planet</button>

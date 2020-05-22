@@ -26,7 +26,7 @@ export default class App extends Component {
   spaceShipPosition: [2, 0],
   ship_name: 'The Fake Enterprise',
   ship_image: 'im an image',
-  ship_fuel: 3,
+  ship_fuel: 8,
   ship_hull: 1,
   ship_credits: 0,
   used_item_slots: 0,
@@ -40,6 +40,7 @@ export default class App extends Component {
   planets_visited: [],
   planets_coordinates: [[0,0]],
   has_won: false,
+  no_fuel: false,
   token: localStorage.getItem('TOKEN_KEY')
   }
   
@@ -111,8 +112,12 @@ locationReveal = async(attemptedClick) => {
           let planet_visited_array = this.state.planets_visited
           planet_visited_array.push(planetIndex)
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
+
+        } else if(attemptedClick === 1) {
+          this.setState({ planet: { location_name: 'Open space'} })
         } else if(attemptedClick === 2) {
           this.setState({ planet: {} })
+
         } else if(attemptedClick === 3) {
           this.setState({ ship_fuel: this.state.ship_fuel + 3, planet: {}})
         } else if(attemptedClick === 4) {
