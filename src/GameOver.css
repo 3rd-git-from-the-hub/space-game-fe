@@ -2,9 +2,22 @@
     position: absolute;
     top: 20px;
     color: white;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    font-family: monospace;
+    font-size: 20px;
 }
 
 .game-over-link {
     color: teal;
     margin: 50px;
+    border: 3px solid teal;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: honeydew;
+}
+
+.game-over-link:hover {
+    background-color: rgb(152, 158, 155);
 }

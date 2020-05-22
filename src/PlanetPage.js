@@ -15,7 +15,7 @@ export default class PlanetPage extends Component {
     }
 
     async componentDidMount() {
-        let fetchedEvent = await request.get(`http://localhost:3001/events/${this.props.planet.id}`)
+        let fetchedEvent = await request.get(`https://guarded-reef-50217.herokuapp.com/events/${this.props.planet.id}`)
         const eventChoices = fetchedEvent.body[0].event_choices.map(event => JSON.parse(event))
         this.setState({ event: fetchedEvent.body[0], eventChoices: eventChoices })
     }

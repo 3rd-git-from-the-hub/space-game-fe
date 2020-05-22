@@ -66,10 +66,10 @@ export default class Signup extends Component {
         e.preventDefault();
         try {
 
-            let token = await request.post('http://localhost:3001/auth/signup', this.state)
+            let token = await request.post('https://guarded-reef-50217.herokuapp.com/auth/signup', this.state)
     
             // create a score table for the user when they first sign up
-            await request.post('http://localhost:3001/api/loggedinuser', {
+            await request.post('https://guarded-reef-50217.herokuapp.com/api/loggedinuser', {
                 name: this.state.email,
                 score: 0
             })
@@ -121,12 +121,12 @@ export default class Signup extends Component {
                             </div>
                                 <div className='container-form-btn'>
                                     <div className='wrap-form-btn'>
-                                        <button>Sign Up</button>
+                                        <button className='login-form-button'>Sign Up</button>
                                 </div>
                             </div>
                         </form>
                         {this.state.failure && <p>Username and password already exsists</p>}
-                        <button onClick={this.goToSignIn}>Go to Log In</button>
+                        <button className='login-form-button' onClick={this.goToSignIn}>Go to Log In</button>
                         <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
                     </div>
                 </div>

@@ -68,7 +68,7 @@ export default class Signin extends Component {
         e.preventDefault();
         try {
 
-            let token = await request.post('http://localhost:3001/auth/signin', this.state)
+            let token = await request.post('https://guarded-reef-50217.herokuapp.com/auth/signin', this.state)
             this.props.tokenChange(token.body.token)
             this.props.history.push('/characterselect')
         } catch {
@@ -116,12 +116,12 @@ export default class Signin extends Component {
                 </div>
                     <div className='container-form-btn'>
                         <div className='wrap-form-btn'>
-                            <button>Sign In</button>
+                            <button className='login-form-button'>Sign In</button>
                     </div>
                 </div>
             </form>
             {this.state.failure && <p>Username and password not accepted</p>}
-            <button onClick={this.goToSignUp}>Go to Sign Up </button>
+            <button className='login-form-button' onClick={this.goToSignUp}>Go to Sign Up </button>
             <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
         </div>
     </div>
