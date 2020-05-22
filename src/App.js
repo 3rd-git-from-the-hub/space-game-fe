@@ -12,6 +12,7 @@ import Signup from './signup.js'
 import GameOver from './GameOver.js'
 import Game from './Game.js'
 import CharacterSelectPage from './CharacterSelectPage.js'
+import About from './About.js'
 
 export default class App extends Component {
   state = {
@@ -245,6 +246,8 @@ spaceshipSelectHandle = async(e) => {
              fuel={this.state.ship_fuel}
              {...routerProps}/>}/>
             <Route path='/secretPage' render={(routerProps) => <Game userShip={this.state.userShip}
+             {...routerProps}/>}/>
+             <Route path='/about' render={(routerProps) => <About 
              {...routerProps}/>}/>
           </Switch>
         </Router>

@@ -100,4 +100,6 @@ input[type=radio]:checked + img {
     margin-bottom: 10px;
 }
 
-
+#aboutUsText{
+    color: white;
+}

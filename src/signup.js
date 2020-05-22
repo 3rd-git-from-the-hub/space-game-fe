@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import request from 'superagent';
 import * as THREE from 'three';
 import whiteCircle from './photos/background/whiteCircle.png'
+import { Link } from 'react-router-dom'
 
 export default class Signup extends Component {
     componentDidMount() {
@@ -126,6 +127,7 @@ export default class Signup extends Component {
                         </form>
                         {this.state.failure && <p>Username and password already exsists</p>}
                         <button onClick={this.goToSignIn}>Go to Log In</button>
+                        <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
                     </div>
                 </div>
             </div>

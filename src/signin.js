@@ -3,6 +3,7 @@ import request from 'superagent';
 import './test.css'
 import * as THREE from 'three';
 import whiteCircle from './photos/background/whiteCircle.png'
+import { Link } from 'react-router-dom';
 
 export default class Signin extends Component {
     componentDidMount() {
@@ -89,6 +90,9 @@ export default class Signin extends Component {
         return (
             <>
     <div ref={ref => (this.mount = ref)} ></div>
+    <div>
+        
+    </div>
 <div className='limiter'>
     <div className='login-container'>
         <div className='wrap-login'>
@@ -118,6 +122,7 @@ export default class Signin extends Component {
             </form>
             {this.state.failure && <p>Username and password not accepted</p>}
             <button onClick={this.goToSignUp}>Go to Sign Up </button>
+            <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
         </div>
     </div>
 </div>
