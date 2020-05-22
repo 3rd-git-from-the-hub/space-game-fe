@@ -16,6 +16,13 @@ export default class CharacterSelectPage extends Component {
             <div className='limiter'>
                 <div className='space-container login-container'>
                     <div className='wrap-login'>
+                        <div>
+                            <span id='instructions'><p>You have been sent by Earth to find a new planet for human kind. <br></br>Travel along the black holes to enter new universes and find new planets for your people. <br/>
+                            1. Click on a planet and decide if you want to land on the planet <br/>
+                            2. If you choose to land, be prepared to take any action necessary to ensure <br/>the success of your mission! <br/>
+                            3. Keep a look out for the planet called Orion. No one has been there but <br/>rumor has it that it is supposed to be our next best shot at survival.</p>
+                             </span>
+                        </div>
                     <span className="login100-form-title p-b-26">
 						Choose Your Vessel
 					</span>
@@ -52,7 +59,7 @@ export default class CharacterSelectPage extends Component {
                                 </div>
                             </div>
                         </form>
-                        <button onClick={this.onClick}>Start Your Journey</button>
+                        <button onClick={this.onClick} className='login-form-button'>Start Your Journey</button>
                     </div>
                 </div>
 

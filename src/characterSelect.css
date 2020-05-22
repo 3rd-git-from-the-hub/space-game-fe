@@ -15,6 +15,7 @@
 }
 
 .login-container{
+    font-family: monospace;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -36,7 +37,7 @@
 
 .login100-form-title {
     display: block;
-    font-family: Poppins-Bold;
+    font-family: monospace;
     font-size: 30px;
     color: black;
     line-height: 1.2;
@@ -89,5 +90,14 @@ input[type=radio]:checked + img {
     margin-top: 20px;
 }
 
+#instructions {
+    font-family: monospace;
+    font-size: 20px;
+}
+
+.login-form-button {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
 
 
