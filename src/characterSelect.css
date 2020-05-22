@@ -98,6 +98,12 @@ input[type=radio]:checked + img {
 .login-form-button {
     font-size: 16px;
     margin-bottom: 10px;
+    border: 3px solid goldenrod;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.login-form-button:hover {
+    background-color: rgb(152, 158, 155);
 }
 
 #aboutUsText{

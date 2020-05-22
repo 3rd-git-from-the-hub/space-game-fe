@@ -10,16 +10,15 @@ import request from 'superagent'
 import Signin from './signin.js'
 import Signup from './signup.js'
 import GameOver from './GameOver.js'
-import Game from './Game.js'
 import CharacterSelectPage from './CharacterSelectPage.js'
 import About from './About.js'
 
 export default class App extends Component {
   state = {
     grid: [
-  [0, 1, 1, 3, 2, 0, 0, 0, 4],
+  [0, 2, 1, 3, 2, 0, 0, 0, 4],
   [0, 3, 0, 0, 1, 1, 1, 0, 1],
-  [2, 1, 0, 0, 0, 0, 2, 1, 2],
+  [2, 1, 0, 0, 0, 0, 1, 1, 1],
   ],
   possiblePosition: [],
   planet: {},
@@ -28,7 +27,7 @@ export default class App extends Component {
   ship_image: 'im an image',
   ship_fuel: 8,
   ship_hull: 1,
-  ship_credits: 0,
+  ship_credits: 5,
   used_item_slots: 0,
   max_item_slots: 3,
   ship_stats: {
@@ -121,7 +120,7 @@ locationReveal = async(attemptedClick) => {
         } else if(attemptedClick === 3) {
           this.setState({ ship_fuel: this.state.ship_fuel + 3, planet: {}})
         } else if(attemptedClick === 4) {
-          this.setState({ has_won: true, planet: { location_name: 'Earth 2' } })
+          this.setState({ has_won: true, planet: { location_name: 'Planet: JDXDJ73J39' } })
         }
     }
 
@@ -204,7 +203,11 @@ spaceshipSelectHandle = async(e) => {
                   base_diplomacy: userShip.base_diplomacy,
                   base_science: userShip.base_science },
                   used_item_slots: userShip.used_item_slots,
-                  max_item_slots: userShip.max_item_slots, 
+                  max_item_slots: userShip.max_item_slots,
+                  spaceShipPosition: [2, 0],
+                  planets_visited: [],
+                  planets_coordinates: [[0,0]],
+
                 })
   
 }
@@ -249,8 +252,6 @@ spaceshipSelectHandle = async(e) => {
              token={this.state.token}
              hull={this.state.ship_hull}
              fuel={this.state.ship_fuel}
-             {...routerProps}/>}/>
-            <Route path='/secretPage' render={(routerProps) => <Game userShip={this.state.userShip}
              {...routerProps}/>}/>
              <Route path='/about' render={(routerProps) => <About 
              {...routerProps}/>}/>

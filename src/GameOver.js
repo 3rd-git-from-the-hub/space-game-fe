@@ -48,7 +48,7 @@ export default class GameOver extends Component {
             await request.put('http://localhost:3001/api/loggedinuser')
             .set('Authorization', this.props.token)
 
-            this.setState({ final_message: `Your monitor brings up your location. "Planet: JDXDJ73J39" A smile crosses your face as you let out a sigh or relief. You found it...Gaia. You quickly send a message back to Earth with your location. Finally a new home....` })
+            this.setState({ final_message: `Your monitor brings up your location. "Planet: JDXDJ73J39" A smile crosses your face as you let out a sigh or relief. You found it...Orion. You quickly send a message back to Earth with your location. Finally a new home....` })
 
             // get the total amount of users wins
             const winData = await request.get('http://localhost:3001/api/loggedinuser')

@@ -116,12 +116,12 @@ export default class Signin extends Component {
                 </div>
                     <div className='container-form-btn'>
                         <div className='wrap-form-btn'>
-                            <button>Sign In</button>
+                            <button className='login-form-button'>Sign In</button>
                     </div>
                 </div>
             </form>
             {this.state.failure && <p>Username and password not accepted</p>}
-            <button onClick={this.goToSignUp}>Go to Sign Up </button>
+            <button className='login-form-button' onClick={this.goToSignUp}>Go to Sign Up </button>
             <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
         </div>
     </div>

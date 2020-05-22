@@ -121,12 +121,12 @@ export default class Signup extends Component {
                             </div>
                                 <div className='container-form-btn'>
                                     <div className='wrap-form-btn'>
-                                        <button>Sign Up</button>
+                                        <button className='login-form-button'>Sign Up</button>
                                 </div>
                             </div>
                         </form>
                         {this.state.failure && <p>Username and password already exsists</p>}
-                        <button onClick={this.goToSignIn}>Go to Log In</button>
+                        <button className='login-form-button' onClick={this.goToSignIn}>Go to Log In</button>
                         <Link to='/about'><p id='aboutUsText'>ABOUT US</p></Link>
                     </div>
                 </div>

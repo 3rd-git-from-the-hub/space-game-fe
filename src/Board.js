@@ -55,11 +55,11 @@ export default class Board extends Component {
                             <p>Scan Complete: {this.props.planet.location_description}</p>
                             {planet
                             ? <h3>No Planet Detected: Continue Your Voyage</h3>
-                            : <button onClick={this.goToNextPage}>Investigate Planet</button>
+                            : <button className="button" onClick={this.goToNextPage}>Investigate Planet</button>
                              }   
                         </div>
                         <div>
-                            <img className="planet-image" src={this.props.planet.location_image} alt=''/>
+                            {this.props.planet.location_image && <img className="planet-image" src={this.props.planet.location_image} alt=''/>}
                         </div>
                     </div>
             
