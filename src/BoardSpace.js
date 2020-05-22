@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './BoardSpace.css'
 
 export default class BoardSpace extends Component {
+    state={
+        ship_name: ''
+    }
+    componentDidMount = () => {
+        const shipName = localStorage.getItem('SHIP_NAME')
+        this.setState=({ship_name: shipName})
+    }
 
     hasWon = () => {
         if(this.props.hasWon === true) {
@@ -24,9 +31,12 @@ export default class BoardSpace extends Component {
             extraClassName = 'flypath'
         } else if(boardSpaceType === 4) {
             extraClassName = 'goal'
+        } else if(boardSpaceType === 3) {
+            extraClassName = 'station'
         }
 
         if(row === this.props.spaceship[0] && col === this.props.spaceship[1]) {
+
             spaceShipClass = 'spaceship'
         }
 

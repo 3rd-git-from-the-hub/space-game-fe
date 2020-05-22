@@ -103,7 +103,7 @@ export default class Signup extends Component {
                     <span className="login100-form-title p-b-26">
                         Signup
                     </span>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className={'signup-form'}>
                             <div className='login-options'>
                                 <div className='wrap-input'>
                                 <label>
@@ -125,7 +125,7 @@ export default class Signup extends Component {
                             </div>
                         </form>
                         {this.state.failure && <p>Username and password already exsists</p>}
-                        <button onClick={this.goToSignIn}>Go to sign in </button>
+                        <button onClick={this.goToSignIn}>Go to Log In</button>
                     </div>
                 </div>
             </div>
