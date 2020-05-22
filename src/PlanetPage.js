@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent'
+import './planetpage.css'
 
 export default class PlanetPage extends Component {
     state = {
@@ -55,31 +56,39 @@ export default class PlanetPage extends Component {
 
     render() {
         return (
-            <div>
-                <p>{this.state.event.event_image}</p>
-                <p>{this.state.event.event_name}</p>
-                <p>{this.state.event.event_description}</p>
-                {!this.state.results && this.state.event.event_choices.map(event => JSON.parse(event)).map(
-                    (event, index) => <div>
-                        <p>Choice: {event.choice_description}</p>
+            <div className="planet-page-container">
+                <div className="event-image-container">
+                    <img className="event-image" src={this.state.event.event_image} alt=""/>
+                </div>
+                <div className="text-section">
+                    <div className="event-title">
+                        <p className="title">{this.state.event.event_name}</p>
+                        <p>{this.state.event.event_description}</p>
+                    </div>
+                    <div className="event-details">
+                    {!this.state.results && this.state.event.event_choices.map(event => JSON.parse(event)).map(
+                        (event, index) => <div>
+                            <p>{event.choice_description}</p>
 
-                        <button onClick= {() => this.choiceMade(index)}>Choose</button>
+                            <button className="button" onClick= {() => this.choiceMade(index)}>Choose</button>
 
-                        </div>
-                                )
-            }
-            {this.state.results && <div>
-                <p>{this.state.results}</p>
-                <p>You needed a {this.state.rollNeeded} and your total roll was {this.state.userRoll}.</p>
-                <ul>
-                    <li>Hull change: {this.state.rewards[2]}</li>
-                    <li>Fuel change: {this.state.rewards[0]}</li>
-                    <li>Credit change: {this.state.rewards[1]}</li>
-                </ul>
-             
-                <button onClick={this.goToNextPage}>Continue Your Search</button>
+                            </div>
+                                    )
+                }
+                </div>
+                {this.state.results && <div className="planet-results">
+                    <p>{this.state.results}</p>
+                    <p>You needed a {this.state.rollNeeded} and your total roll was {this.state.userRoll}.</p>
+                    <ul>
+                        <li>Hull change: {this.state.rewards[2]}</li>
+                        <li>Fuel change: {this.state.rewards[0]}</li>
+                        <li>Credit change: {this.state.rewards[1]}</li>
+                    </ul>
+                
+                    <button className="button" onClick={this.goToNextPage}>Continue Your Search</button>
 
-                </div>}
+                    </div>}
+                </div>
             </div>
         )
     }
