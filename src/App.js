@@ -39,7 +39,12 @@ export default class App extends Component {
   planets_visited: [],
   planets_coordinates: [[0,0]],
   has_won: false,
-  token: localStorage.getItem('TOKEN')
+  token: localStorage.getItem('TOKEN_KEY')
+  }
+  
+  tokenChange = (myToken) => {
+    this.setState({ token: myToken })
+    localStorage.setItem('TOKEN_KEY', myToken) 
   }
 
   clearPlanetFunction = () => {
@@ -127,13 +132,64 @@ handleSpacePress = async (col, row) => {
     this.isMoveInRange(this.state.spaceShipPosition, proposedPosition, attemptedClick)
 }
 
-updateShipSelection = (e) => {this.setState({ shipInitialSelect: e.target.value})}
+updateShipSelection = (e) => {
+  
+  this.setState({ shipInitialSelect: e.target.value})
+  
+}
+
+
 
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
   const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
+  
+  if(this.state.shipInitialSelect === "1" || this.state.shipInitialSelect === 1) {
+    const color = await request.get(`http://www.colr.org/json/scheme/11154`)
+    console.log(JSON.parse(color.text));
+    const parsedObject = JSON.parse(color.text);
 
+  
+    console.log(parsedObject.schemes[0].colors)
 
+    const themeColors = parsedObject.schemes[0].colors;
+  
+    const colorScheme = {
+      'background-clr': themeColors[3],
+      'font_clr':themeColors[1],
+      'border-clr': themeColors[2]
+    }
+    localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
+    
+    
+  } else  if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
+    const color = await request.get(`http://www.colr.org/json/scheme/17822`)
+    const parsedObject = JSON.parse(color.text);
+
+  
+
+    const themeColors = parsedObject.schemes[0].colors;
+  
+    const colorScheme = {
+      'background-clr': themeColors[2],
+      'font_clr':themeColors[4],
+      'border-clr': themeColors[3]
+    }
+    localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
+  } else  if(this.state.shipInitialSelect === "3" || this.state.shipInitialSelect === 3) {
+    const color = await request.get(`http://www.colr.org/json/scheme/7078`)
+
+    const parsedObject = JSON.parse(color.text);
+
+    const themeColors = parsedObject.schemes[0].colors;
+  
+    const colorScheme = {
+      'background-clr': themeColors[1],
+      'font_clr': '#ffffff',
+      'border-clr': themeColors[2]
+    }
+    localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
+  }
   let userShip = shipChoice.body[0];
   this.setState({ ship_name: userShip.ship_name,
                   ship_image: userShip.ship_image,
@@ -180,10 +236,13 @@ spaceshipSelectHandle = async(e) => {
              shipStats={this.state.ship_stats}
              {...routerProps}/>}/>
              <Route path='/' exact render={(routerProps) => <Signup 
+             tokenChange={this.tokenChange}
              {...routerProps}/>}/>
              <Route path='/signin' render={(routerProps) => <Signin
+             tokenChange={this.tokenChange}
              {...routerProps}/>}/>
              <Route path='/gameOver' render={(routerProps) => <GameOver
+             token={this.state.token}
              hull={this.state.ship_hull}
              fuel={this.state.ship_fuel}
              {...routerProps}/>}/>
