@@ -168,10 +168,9 @@ spaceshipSelectHandle = async(e) => {
     
   
   } else if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
+
     const color = await request.get(`https://api.allorigins.win/get?url=${encodeURIComponent('http://www.colr.org/json/scheme/17822')}
     `)
-
-    //http://www.colr.org/json/scheme/17822
     const parsedObject = JSON.parse(color.body.contents);
     console.log(parsedObject);
     const themeColors = parsedObject.schemes[0].colors;
@@ -197,8 +196,6 @@ spaceshipSelectHandle = async(e) => {
     }
     localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme));
     localStorage.setItem('SHIP_NAME', userShip.id);
-  }
-
 
   this.setState({ ship_name: userShip.ship_name,
                   ship_image: userShip.ship_image,
@@ -217,7 +214,8 @@ spaceshipSelectHandle = async(e) => {
 
                 })
   
-}
+              }
+            }
   render() {
     return (
       <div>
