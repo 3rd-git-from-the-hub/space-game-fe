@@ -152,7 +152,7 @@ spaceshipSelectHandle = async(e) => {
   console.log(userShip);
   
   if(this.state.shipInitialSelect === "1") {
-    const color = await request.get(`https://www.colr.org/json/scheme/11154`)
+    const color = await request.get(`http://www.colr.org/json/scheme/11154`)
     const parsedObject = JSON.parse(color.text);
     
     const themeColors = parsedObject.schemes[0].colors;
@@ -166,7 +166,7 @@ spaceshipSelectHandle = async(e) => {
     
   
   } else if(this.state.shipInitialSelect === "2" || this.state.shipInitialSelect === 2) {
-    const color = await request.get(`https://www.colr.org/json/scheme/17822`)
+    const color = await request.get(`http://www.colr.org/json/scheme/17822`)
     const parsedObject = JSON.parse(color.text);
     console.log(parsedObject);
     const themeColors = parsedObject.schemes[0].colors;
@@ -178,7 +178,7 @@ spaceshipSelectHandle = async(e) => {
     localStorage.setItem('COLOR_SCHEME', JSON.stringify(colorScheme))
     localStorage.setItem('SHIP_NAME', userShip.id);
   } else if(this.state.shipInitialSelect === "3" || this.state.shipInitialSelect === 3) {
-    const color = await request.get(`https://www.colr.org/json/scheme/7078`)
+    const color = await request.get(`http://www.colr.org/json/scheme/7078`)
 
     const parsedObject = JSON.parse(color.text);
 
