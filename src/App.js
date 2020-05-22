@@ -101,7 +101,7 @@ export default class App extends Component {
 locationReveal = async(attemptedClick) => {
     
     if(attemptedClick === 1) {
-        let fetchedPlanet = await request.get('http://localhost:3001/randomplanet')
+        let fetchedPlanet = await request.get('https://guarded-reef-50217.herokuapp.com/randomplanet')
         let planet = fetchedPlanet.body
         let planetIndex = Math.floor(Math.random()* fetchedPlanet.body.length)
         while(this.state.planets_visited.includes(planetIndex) && (this.state.planets_visited.length < 4)) {
@@ -147,7 +147,7 @@ updateShipSelection = (e) => {
 
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
-  const shipChoice = await request.get(`http://localhost:3001/usership/${this.state.shipInitialSelect}`)
+  const shipChoice = await request.get(`https://guarded-reef-50217.herokuapp.com/usership/${this.state.shipInitialSelect}`)
   let userShip = shipChoice.body[0];
   console.log(userShip);
   

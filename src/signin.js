@@ -68,7 +68,7 @@ export default class Signin extends Component {
         e.preventDefault();
         try {
 
-            let token = await request.post('http://localhost:3001/auth/signin', this.state)
+            let token = await request.post('https://guarded-reef-50217.herokuapp.com/auth/signin', this.state)
             this.props.tokenChange(token.body.token)
             this.props.history.push('/characterselect')
         } catch {

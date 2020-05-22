@@ -66,10 +66,10 @@ export default class Signup extends Component {
         e.preventDefault();
         try {
 
-            let token = await request.post('http://localhost:3001/auth/signup', this.state)
+            let token = await request.post('https://guarded-reef-50217.herokuapp.com/auth/signup', this.state)
     
             // create a score table for the user when they first sign up
-            await request.post('http://localhost:3001/api/loggedinuser', {
+            await request.post('https://guarded-reef-50217.herokuapp.com/api/loggedinuser', {
                 name: this.state.email,
                 score: 0
             })
