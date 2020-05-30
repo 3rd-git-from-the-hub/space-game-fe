@@ -30,6 +30,7 @@ export default class Board extends Component {
    
 
     checkPlanet = (planet) => {
+        // ooo, interesting property checking! Not sure what this does for you, though. It seems like this is making sure it is not an empty object? If so, I'd prefect Object.keys(planet).length
         for(let key in planet) {
             if(planet.hasOwnProperty(key))
             return false;
@@ -38,7 +39,7 @@ export default class Board extends Component {
     }
 
     render() {
-
+        // this render method is getting a bit complex--it probably would be best to break it into a few components
      
         let planet = this.checkPlanet(this.props.planet)
         

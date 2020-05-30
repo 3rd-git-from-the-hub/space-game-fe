@@ -28,6 +28,7 @@ export default class CharacterSelectPage extends Component {
 					</span>
                         <form onSubmit={this.props.submitHandle} className='login-form'>
                             <div className='ship-options'>
+                        {/* Feels like these should be componentized then made into an array of data and mapped over */}
                             <div className='wrap-input'>
                                 <label>
                                 <input type='radio' value='1' onChange = {this.props.handleChange} name='spaceship' className='rocketRadio' defaultChecked/>

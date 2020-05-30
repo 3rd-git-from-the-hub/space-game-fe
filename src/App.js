@@ -15,7 +15,7 @@ import About from './About.js'
 
 export default class App extends Component {
   state = {
-    grid: [
+    grid: [ // would have been nice to see this change, since it's living in state
   [0, 2, 1, 3, 2, 0, 0, 0, 4],
   [0, 3, 0, 0, 1, 1, 1, 0, 1],
   [2, 1, 0, 0, 0, 0, 1, 1, 1],
@@ -65,6 +65,7 @@ export default class App extends Component {
     })
   }
 
+  // very cool util function! I wonder if it should be in a separate file, where it can be easily tested and resued throughout the app
   coordinatesInclude = (array, position) => {
     const stringPosition = JSON.stringify(position)
     const isInArray = array.some(item => {
@@ -95,9 +96,9 @@ export default class App extends Component {
 
       this.locationReveal(attemptedClick)
     }
-
 }
 
+// this is quite a function--I would have liked to see a test for something this complex, to make sure it's doing what you want it to do. Especially with input and effects that are difficult to follow, it makes sense to have a test to make sure future devs don't break the fucntionality.
 locationReveal = async(attemptedClick) => {
     
     if(attemptedClick === 1) {
@@ -110,6 +111,7 @@ locationReveal = async(attemptedClick) => {
         console.log(planet)
           let planet_visited_array = this.state.planets_visited
           planet_visited_array.push(planetIndex)
+          // nice job--dealing with arrays in state isn't easy to figure out
           this.setState({ planet: planet[planetIndex], planets_visited: planet_visited_array })
 
         } else if(attemptedClick === 2) {
@@ -139,8 +141,6 @@ updateShipSelection = (e) => {
   this.setState({ shipInitialSelect: e.target.value})
   
 }
-
-
 
 spaceshipSelectHandle = async(e) => {
   e.preventDefault();
@@ -220,15 +220,7 @@ spaceshipSelectHandle = async(e) => {
           
           <Switch>
             <Route path='/board' exact render={(routerProps) => <Board 
-            grid={this.state.grid} 
-            possiblePosition={this.state.possiblePosition} 
-            planet={this.state.planet}
-            spaceShipPosition={this.state.spaceShipPosition}
-            handleSpacePress={this.handleSpacePress}
-            hasWon={this.state.has_won}
-            shipFuel={this.state.ship_fuel}
-            shipHull={this.state.ship_hull}
-            shipCredits={this.state.ship_credits}
+            {...this.state /* this is the shorthand for passing all of state down */}
             {...routerProps}
             />}/>
             <Route path='/characterSelect' render={(routerProps) => <CharacterSelectPage
@@ -236,14 +228,10 @@ spaceshipSelectHandle = async(e) => {
             handleChange={this.updateShipSelection}
              {...routerProps}/>}/>
              <Route path='/planet' render={(routerProps) => <PlanetPage 
-             planet={this.state.planet}
              applyShipStats={this.applyShipStats}
              clearPlanetFunction={this.clearPlanetFunction}
-             shipFuel={this.state.ship_fuel}
-             shipHull={this.state.ship_hull}
-             shipCredits={this.state.ship_credits}
-             shipStats={this.state.ship_stats}
-             {...routerProps}/>}/>
+             {...this.state /* this is the shorthand for passing all of state down without having to be specific */}
+            {...routerProps}/>}/>
              <Route path='/' exact render={(routerProps) => <Signup 
              tokenChange={this.tokenChange}
              {...routerProps}/>}/>
