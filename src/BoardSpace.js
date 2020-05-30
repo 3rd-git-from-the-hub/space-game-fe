@@ -23,17 +23,14 @@ export default class BoardSpace extends Component {
         let extraClassName;
         let spaceShipClass = '';
         // make this a switch statement
-        if(boardSpaceType === 0) {
-            extraClassName = 'nofly'
-        } else if(boardSpaceType === 1) {
-            extraClassName = 'planet'
-        } else if(boardSpaceType === 2) {
-            extraClassName = 'flypath'
-        } else if(boardSpaceType === 4) {
-            extraClassName = 'goal'
-        } else if(boardSpaceType === 3) {
-            extraClassName = 'station'
-        }
+        // since your boardSpaceTypes are all numbers that correspond to indicies, you could have done this
+        extraClassName = [
+            'nofly',
+            'planet',
+            'flypath',
+            'goal',
+            'station'
+        ][boardSpaceType];
 
         if(row === this.props.spaceship[0] && col === this.props.spaceship[1]) {
 
@@ -42,7 +39,7 @@ export default class BoardSpace extends Component {
 
         return (
             <div className={`boardspace ${extraClassName} ${spaceShipClass}`} 
-            onClick={() => this.props.onClick(row, col)}
+            onClick={() => this.props.onClick(row, col)} /* nice job managing this dynamic callback inline */
             >
 
             </div>
